@@ -4,15 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        style="@style/header"
+        tools:ignore="MissingConstraints">
+
+        <ImageButton
+            style="@style/header_img"
+            android:src="@drawable/call"/>
+        <ImageButton
+            style="@style/header_img"
+            android:src="@drawable/basket"/>
+        <ImageButton
+            style="@style/header_img"
+            android:src="@drawable/search"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
