@@ -28,11 +28,66 @@
         style="@style/body">
         
         <LinearLayout
-            style="@style/title_wrapper">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:text="@string/title"
+                android:layout_marginBottom="20dp"
                 style="@style/title"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/title_card">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/title_card_bg"
+                    style="@style/title_card.bg" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="50dp"
+                    style="@style/title_card.text_wrapper">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_card_text"
+                        style="@style/title_card.white_text.big_text" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_card_sub_title"
+                        android:layout_marginTop="10dp"
+                        style="@style/title_card.blue_text.medium_text" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_card_date"
+                        android:layout_marginTop="15dp"
+                        style="@style/title_card.white_text.small_text"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        style="@style/title_card.white_text.btn"
+                        android:text="@string/title_card_btn"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
     </LinearLayout>

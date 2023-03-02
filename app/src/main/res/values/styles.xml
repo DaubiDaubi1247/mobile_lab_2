@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="title_card.white_text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="title_card.blue_text">
+        <item name="android:textColor">@color/teal_200</item>
+    </style>
+
+    <style name="title_card.margin_top">
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="title_card.white_text.big_text">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="title_card.bg">
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="title_card.text_wrapper">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="title_card.blue_text.medium_text">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="title_card.white_text.small_text">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="title_card.white_text.btn">
+        <item name="android:textSize">8sp</item>
+        <item name="backgroundTint">@color/grey</item>
+        <item name="android:radius">16dp</item>
+    </style>
+
+</resources>
