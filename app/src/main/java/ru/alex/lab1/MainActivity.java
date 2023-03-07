@@ -36,9 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private void setInitialData(){
 
         monsterList.add(new Monster ("Вампиры", R.drawable.vampire));
-        monsterList.add(new Monster ("Вампиры", R.drawable.vampire));
-        monsterList.add(new Monster ("Вампиры", R.drawable.vampire));
-        monsterList.add(new Monster ("Вампиры", R.drawable.vampire));
-        monsterList.add(new Monster ("Вампиры", R.drawable.vampire));
+        monsterList.add(new Monster ("Духи и призраки", R.drawable.ghost));
+        monsterList.add(new Monster ("Дракониды", R.drawable.draconid));
+        monsterList.add(new Monster ("Реликты", R.drawable.relict));
+        monsterList.add(new Monster ("Огры", R.drawable.ogr));
+        monsterList.add(new Monster ("Гибриды", R.drawable.gibrid));
     }
 }

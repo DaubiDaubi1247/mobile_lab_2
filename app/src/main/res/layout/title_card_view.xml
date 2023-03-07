@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/title_card_bg"
+        android:scaleType="fitCenter"
         style="@style/title_card.bg" />
 
     <LinearLayout
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title_card_sub_title"
             android:layout_marginTop="10dp"
-            style="@style/title_card.blue_text.medium_text" />
+            style="@style/title_card.white_text.medium_text" />
 
         <TextView
             android:layout_width="wrap_content"

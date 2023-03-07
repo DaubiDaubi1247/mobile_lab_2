@@ -27,7 +27,7 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="title_card.blue_text.medium_text">
+    <style name="title_card.white_text.medium_text">
         <item name="android:textSize">14sp</item>
     </style>
 
@@ -40,5 +40,7 @@
         <item name="backgroundTint">@color/grey</item>
         <item name="android:radius">16dp</item>
     </style>
+    
+
 
 </resources>
