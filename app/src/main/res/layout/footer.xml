@@ -7,8 +7,9 @@
     android:layout_height="wrap_content"
     tools:showIn="@layout/activity_main"
     app:menu="@menu/footer_nav_menu"
-    app:itemIconTint="@color/white"
-    app:itemTextColor="@color/white"
+    app:itemIconTint="@color/nav_item_color"
+    app:itemTextColor="@color/nav_item_color"
+    app:labelVisibilityMode="labeled"
     style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
     >
 

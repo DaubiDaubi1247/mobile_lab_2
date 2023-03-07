@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         MonstersAdapter monstersAdapter = new MonstersAdapter(this, monsterList);
 //        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(monstersAdapter);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        
+        bottomNavigationView.setSelectedItemId(R.id.page_2);
     }
 
     private void setInitialData(){

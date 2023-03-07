@@ -6,4 +6,8 @@
     <string name="title_card_date">Последнее 2 марта</string>
     <string name="title_card_btn">Узнать больше</string>
     <string name="home">Главная</string>
+    <string name="bottom_nav_bar_book">Бестиарий</string>
+    <string name="bottom_nav_bar_person">Персонажи</string>
+    <string name="bottom_nav_bar_memes">Мемы</string>
+    <string name="bottom_nav_bar_youtube">Youtube</string>
 </resources>
