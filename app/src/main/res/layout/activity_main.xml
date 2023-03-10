@@ -39,7 +39,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/body"
         app:layout_constraintTop_toBottomOf="@id/header"
-        android:layout_height="wrap_content">
+        app:layout_constraintBottom_toTopOf="@id/footer"
+        android:layout_height="0dp">
 
     <LinearLayout
         android:layout_height="wrap_content"
@@ -67,17 +68,14 @@
             <include layout="@layout/title_card_view" />
         </LinearLayout>
 
-        <LinearLayout
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:columnCount="2"
+            android:id="@+id/card_list">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"/>
-        </LinearLayout>
+        </GridLayout>
 
 
     </LinearLayout>
