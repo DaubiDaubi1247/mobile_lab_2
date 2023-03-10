@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,24 +37,21 @@ public class MainActivity extends AppCompatActivity {
         setInitialData();
 
         GridLayout gridLayout = findViewById(R.id.card_list);
-        LayoutInflater ltInflater = getLayoutInflater();
 
-        fillLayoutWithList(gridLayout, ltInflater);
+        fillLayoutWithList(gridLayout);
 
         gridLayout.setRowCount((int) Math.ceil(monsterList.size() / 2.0));
 
-//        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-//
-//        MonstersAdapter monstersAdapter = new MonstersAdapter(this, monsterList);
-////        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-//        recyclerView.setAdapter(monstersAdapter);
+        ScrollView scrollView = findViewById(R.id.body);
+        scrollView.setVerticalScrollBarEnabled(false);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 //
         bottomNavigationView.setSelectedItemId(R.id.page_2);
     }
 
-    private void fillLayoutWithList(GridLayout gridLayout, LayoutInflater ltInflater) {
+    private void fillLayoutWithList(GridLayout gridLayout) {
+        LayoutInflater ltInflater = getLayoutInflater();
         for (Monster monster : monsterList) {
             View item = ltInflater.inflate(R.layout.recycler_view_card, gridLayout, false);
             TextView title = item.findViewById(R.id.recycler_view_card_title);

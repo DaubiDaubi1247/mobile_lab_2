@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">lab1</string>
-    <string name="title"><b>Бестиарий</b></string>
-    <string name="title_card_text"><b>Полный</b> сборник\nвсех существ</string>
+    <string name="title"><b> Бестиарий</b></string>
+    <string  name="title_card_text"><b>Полный</b> сборник\nвсех существ</string>
     <string name="title_card_sub_title">Постоянно обновляется</string>
     <string name="title_card_date">Последнее 2 марта</string>
     <string name="title_card_btn">Узнать больше</string>

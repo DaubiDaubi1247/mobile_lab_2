@@ -17,8 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/body"
 
-        style="@style/header"
-        tools:showIn="@layout/activity_main">
+        style="@style/header">
 
         <ImageButton
             style="@style/header_img"
