@@ -16,10 +16,12 @@ import java.util.List;
 
 import ru.alex.lab1.adapter.MonstersAdapter;
 import ru.alex.lab1.pojo.Monster;
+import ru.alex.lab1.recycler.ElementType;
+import ru.alex.lab1.recycler.Title;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Monster> monsterList = new ArrayList<>();
+    List<ElementType> monsterList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setInitialData(){
-
+        monsterList.add(new Title());
         monsterList.add(new Monster ("Вампиры", R.drawable.vampire));
         monsterList.add(new Monster ("Духи и призраки", R.drawable.ghost));
         monsterList.add(new Monster ("Дракониды", R.drawable.draconid));

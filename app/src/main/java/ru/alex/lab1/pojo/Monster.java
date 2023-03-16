@@ -1,6 +1,8 @@
 package ru.alex.lab1.pojo;
 
-public class Monster {
+import ru.alex.lab1.recycler.ElementType;
+
+public class Monster implements ElementType {
     private String name;
     private int imgResource;
 
