@@ -36,6 +36,20 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(monstersAdapter);
 
+        GridLayoutManager glm = new GridLayoutManager(this, 2);
+        glm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (monstersAdapter.getItemViewType(position) == ElementType.TITLE) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+
+
+        recyclerView.setLayoutManager(glm);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         
         bottomNavigationView.setSelectedItemId(R.id.page_2);
