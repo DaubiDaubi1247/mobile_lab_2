@@ -10,18 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import ru.alex.lab1.R;
 import ru.alex.lab1.pojo.Monster;
 import ru.alex.lab1.recycler.ElementType;
-import ru.alex.lab1.recycler.Title;
-import ru.alex.lab1.recycler.TitleCard;
 
-public class MonstersAdapter extends RecyclerView.Adapter {
-    private List<ElementType> elements;
+public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final List<ElementType> elements;
 
     public MonstersAdapter(Context context, List<ElementType> elements) {
         this.elements = elements;
@@ -29,14 +25,11 @@ public class MonstersAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (elements.get(position) instanceof Title) {
-            return ElementType.TITLE;
-        }
-        if (elements.get(position) instanceof TitleCard) {
-            return ElementType.TITLE_CARD;
+        if (elements.get(position) instanceof Monster) {
+            return ElementType.CARDS;
         }
 
-        return ElementType.CARDS;
+        return ElementType.TITLE;
     }
 
     @NonNull
@@ -75,8 +68,8 @@ public class MonstersAdapter extends RecyclerView.Adapter {
         // Ваш ViewHolder должен содержать переменные для всех
         // View-компонентов, которым вы хотите задавать какие-либо свойства
         // в процессе работы пользователя со списком
-        private ImageView monsterImage;
-        private TextView monsterTextView;
+        private final ImageView monsterImage;
+        private final TextView monsterTextView;
 
         // Мы также создали конструктор, который принимает на вход View-компонент строкИ
         // и ищет все дочерние компоненты

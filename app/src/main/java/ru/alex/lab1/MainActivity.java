@@ -16,12 +16,12 @@ import java.util.List;
 
 import ru.alex.lab1.adapter.MonstersAdapter;
 import ru.alex.lab1.pojo.Monster;
+import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.ElementType;
-import ru.alex.lab1.recycler.Title;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<ElementType> monsterList = new ArrayList<>();
+    List<ElementType> recyclerViewElementList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setInitialData();
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-        MonstersAdapter monstersAdapter = new MonstersAdapter(this, monsterList);
-//        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        MonstersAdapter monstersAdapter = new MonstersAdapter(this, recyclerViewElementList);
         recyclerView.setAdapter(monstersAdapter);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -46,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 return 1;
             }
         });
-
-
         recyclerView.setLayoutManager(layoutManager);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -56,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setInitialData(){
-        monsterList.add(new Title());
-        monsterList.add(new Monster ("Вампиры", R.drawable.vampire));
-        monsterList.add(new Monster ("Духи и призраки", R.drawable.ghost));
-        monsterList.add(new Monster ("Дракониды", R.drawable.draconid));
-        monsterList.add(new Monster ("Реликты", R.drawable.relict));
-        monsterList.add(new Monster ("Огры", R.drawable.ogr));
-        monsterList.add(new Monster ("Гибриды", R.drawable.gibrid));
+        recyclerViewElementList.add(new Title());
+        recyclerViewElementList.add(new Monster ("Вампиры", R.drawable.vampire));
+        recyclerViewElementList.add(new Monster ("Духи и призраки", R.drawable.ghost));
+        recyclerViewElementList.add(new Monster ("Дракониды", R.drawable.draconid));
+        recyclerViewElementList.add(new Monster ("Реликты", R.drawable.relict));
+        recyclerViewElementList.add(new Monster ("Огры", R.drawable.ogr));
+        recyclerViewElementList.add(new Monster ("Гибриды", R.drawable.gibrid));
     }
 }
