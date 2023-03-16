@@ -41,11 +41,8 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .inflate(R.layout.title, parent, false));
         }
 
-
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_card, parent, false);
-
-        return new MonsterViewHolder(view);
+        return new MonsterViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recycler_view_card, parent, false));
     }
 
     @Override

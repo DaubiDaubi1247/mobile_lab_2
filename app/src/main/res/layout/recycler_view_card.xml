@@ -11,22 +11,18 @@
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/recycler_view_card_title"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        >
 
         <ImageView
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             android:id="@+id/recycler_view_card_img"
             android:src="@drawable/vampire"/>
     </LinearLayout>

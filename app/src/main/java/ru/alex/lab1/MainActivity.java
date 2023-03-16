@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        
         bottomNavigationView.setSelectedItemId(R.id.page_2);
     }
 
