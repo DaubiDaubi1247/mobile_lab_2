@@ -25,11 +25,7 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        if (elements.get(position) instanceof Monster) {
-            return ElementType.CARDS;
-        }
-
-        return ElementType.TITLE;
+        return elements.get(position).getViewType();
     }
 
     @NonNull
@@ -47,13 +43,7 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        if (holder instanceof MonsterViewHolder) {
-            Monster monster = (Monster) elements.get(position);
-             ((MonsterViewHolder) holder).monsterTextView.setText(monster.getName());
-             ((MonsterViewHolder) holder).monsterImage.setImageResource(monster.getImgResource());
-        }
-
+        elements.get(position).onBindHandler(holder);
     }
 
     @Override
@@ -61,10 +51,16 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return elements.size();
     }
 
-    static class MonsterViewHolder extends RecyclerView.ViewHolder {
-        // Ваш ViewHolder должен содержать переменные для всех
-        // View-компонентов, которым вы хотите задавать какие-либо свойства
-        // в процессе работы пользователя со списком
+    public static class MonsterViewHolder extends RecyclerView.ViewHolder {
+
+        public ImageView getMonsterImage() {
+            return monsterImage;
+        }
+
+        public TextView getMonsterTextView() {
+            return monsterTextView;
+        }
+
         private final ImageView monsterImage;
         private final TextView monsterTextView;
 
@@ -78,7 +74,7 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
-    static class TitleViewHolder extends RecyclerView.ViewHolder {
+    public static class TitleViewHolder extends RecyclerView.ViewHolder {
         public TitleViewHolder(@NonNull View itemView) {
             super(itemView);
         }
