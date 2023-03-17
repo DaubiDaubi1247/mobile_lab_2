@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="title">
-        <item name="android:textSize">@dimen/very_big_in_sp</item>
-    </style>
-
     <style name="title_card">
         <item name="cardCornerRadius">16dp</item>
         <item name="cardElevation">8dp</item>
