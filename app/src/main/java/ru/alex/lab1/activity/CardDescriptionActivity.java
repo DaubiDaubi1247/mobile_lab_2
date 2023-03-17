@@ -39,6 +39,9 @@ public class CardDescriptionActivity extends AppCompatActivity {
         textView.setText(monsterDto.getQuote());
         textView.setTypeface(null, Typeface.ITALIC);
 
+        textView = findViewById(R.id.card_description_quote_author);
+        textView.setText(monsterDto.getQuoteAuthor());
+
         textView = findViewById(R.id.card_description_description);
         textView.setText(monsterDto.getDescription());
     }
