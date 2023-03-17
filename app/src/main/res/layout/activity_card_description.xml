@@ -9,13 +9,16 @@
     <ImageView
         android:id="@+id/card_description_img"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/card_description_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/card_description_img">
+        android:id="@+id/card_description_text"
+        app:layout_constraintTop_toTopOf="@id/card_description_img"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
