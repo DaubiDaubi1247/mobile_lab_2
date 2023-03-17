@@ -3,6 +3,7 @@ package ru.alex.lab1.pojo;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.alex.lab1.adapter.MonstersAdapter;
+import ru.alex.lab1.onClickHandler.MonsterOnclickHandler;
 import ru.alex.lab1.recycler.ElementType;
 
 public class Monster implements ElementType {
@@ -29,8 +30,12 @@ public class Monster implements ElementType {
 
     @Override
     public void onBindHandler(RecyclerView.ViewHolder viewHolder) {
+
+        MonsterOnclickHandler monsterOnclickHandler = new MonsterOnclickHandler(this);
+
         MonstersAdapter.MonsterViewHolder monsterViewHolder = (MonstersAdapter.MonsterViewHolder) viewHolder;
         monsterViewHolder.getMonsterTextView().setText(name);
         monsterViewHolder.getMonsterImage().setImageResource(imgResource);
+        monsterViewHolder.itemView.setOnClickListener(monsterOnclickHandler);
     }
 }

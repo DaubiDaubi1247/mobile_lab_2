@@ -63,9 +63,6 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         private final ImageView monsterImage;
         private final TextView monsterTextView;
-
-        // Мы также создали конструктор, который принимает на вход View-компонент строкИ
-        // и ищет все дочерние компоненты
         public MonsterViewHolder(View itemView) {
             super(itemView);
             monsterImage = itemView.findViewById(R.id.recycler_view_card_img);

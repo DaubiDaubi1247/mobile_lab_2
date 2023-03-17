@@ -17,5 +17,6 @@ public class MonsterOnclickHandler implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = new Intent(view.getContext() ,CardDescriptionActivity.class);
         intent.putExtra("id", monster.getId());
+        view.getContext().startActivity(intent);
     }
 }
