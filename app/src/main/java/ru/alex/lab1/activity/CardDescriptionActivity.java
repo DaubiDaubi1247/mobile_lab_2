@@ -2,6 +2,7 @@ package ru.alex.lab1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class CardDescriptionActivity extends AppCompatActivity {
         monsterDto = getMonsterDtoFromServer(cardId);
 
         setMonsterToLayout();
+
     }
 
     private void setMonsterToLayout() {
@@ -31,9 +33,11 @@ public class CardDescriptionActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.card_description_name);
         textView.setText(monsterDto.getName());
+        textView.setTypeface(null, Typeface.BOLD);
 
         textView = findViewById(R.id.card_description_quote);
         textView.setText(monsterDto.getQuote());
+        textView.setTypeface(null, Typeface.ITALIC);
 
         textView = findViewById(R.id.card_description_description);
         textView.setText(monsterDto.getDescription());
