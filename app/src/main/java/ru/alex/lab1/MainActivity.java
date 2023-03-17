@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -50,9 +52,11 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.page_2);
 
+        // получение картинки с моего сервера
+        //todo спросить можно ли будет с моего сервера тянуть информацию
 //        ImageView imageView = findViewById(R.id.img);
 //
-//        Glide.with(this).load("http://localhost:8080/api/users/2.png").into(imageView);
+//        Glide.with(this).load("http://192.168.0.103:8080/api/users/2.png").into(imageView);
     }
 
     private void setInitialData(){

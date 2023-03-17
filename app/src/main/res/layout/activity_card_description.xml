@@ -35,9 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:textSize="26sp"
+            android:textSize="@dimen/very_big_in_sp"
             android:id="@+id/card_description_name"/>
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,12 +53,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="@dimen/medium_in_sp"
                 android:text="@string/quoteAuthor"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="@dimen/medium_in_sp"
                 android:id="@+id/card_description_quote_author"/>
         </LinearLayout>
 

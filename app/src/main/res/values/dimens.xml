@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="very_big_in_sp">18sp</dimen>
+    <dimen name="big_in_sp">18sp</dimen>
+    <dimen name="medium_in_sp">14sp</dimen>
+    <dimen name="small_in_sp">8sp</dimen>
+
+    <dimen name="recycler_view_card_width">180dp</dimen>
+    <dimen name="recycler_view_card_height">200dp</dimen>
+
+    <dimen name="header_img_size">50dp</dimen>
+
+    <dimen name="title_btn_height">30dp</dimen>
+</resources>
