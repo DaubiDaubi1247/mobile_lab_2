@@ -7,16 +7,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.squareup.picasso.Picasso;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setInitialData(){
         recyclerViewElementList.add(new Title());
-        recyclerViewElementList.add(new Monster ("Вампиры", R.drawable.vampire));
-        recyclerViewElementList.add(new Monster ("Духи и призраки", R.drawable.ghost));
-        recyclerViewElementList.add(new Monster ("Дракониды", R.drawable.draconid));
-        recyclerViewElementList.add(new Monster ("Реликты", R.drawable.relict));
-        recyclerViewElementList.add(new Monster ("Огры", R.drawable.ogr));
-        recyclerViewElementList.add(new Monster ("Гибриды", R.drawable.gibrid));
+        recyclerViewElementList.add(new Monster (1, "Вампиры", R.drawable.vampire));
+        recyclerViewElementList.add(new Monster (2, "Духи и призраки", R.drawable.ghost));
+        recyclerViewElementList.add(new Monster (3, "Дракониды", R.drawable.draconid));
+        recyclerViewElementList.add(new Monster (4, "Реликты", R.drawable.relict));
+        recyclerViewElementList.add(new Monster (5, "Огры", R.drawable.ogr));
+        recyclerViewElementList.add(new Monster (6, "Гибриды", R.drawable.gibrid));
     }
 }
