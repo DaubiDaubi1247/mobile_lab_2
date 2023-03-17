@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/card_description_text"
 
-        app:layout_constraintHeight_max="300dp"
+        app:layout_constraintHeight_max="@dimen/description_card_img_max_height"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="@dimen/medium_in_sp"
             android:id="@+id/card_description_quote"/>
 
         <LinearLayout

@@ -5,7 +5,7 @@
     </style>
 
     <style name="title">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">@dimen/very_big_in_sp</item>
     </style>
 
     <style name="title_card">
