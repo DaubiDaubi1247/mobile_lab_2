@@ -22,9 +22,7 @@ public class CardDescriptionActivity extends AppCompatActivity {
 
         int cardId = getIntent().getIntExtra("id", 1);
         monsterDto = getMonsterDtoFromServer(cardId);
-
         setMonsterToLayout();
-
     }
 
     private void setMonsterToLayout() {

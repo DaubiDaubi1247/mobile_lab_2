@@ -23,9 +23,6 @@
         <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <style name="title_card.text_wrapper">
-        <item name="android:orientation">vertical</item>
-    </style>
 
     <style name="title_card.white_text.btn">
         <item name="backgroundTint">@color/grey</item>

@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -19,11 +17,11 @@ import java.util.List;
 import ru.alex.lab1.adapter.MonstersAdapter;
 import ru.alex.lab1.pojo.Monster;
 import ru.alex.lab1.pojo.Title;
-import ru.alex.lab1.recycler.ElementType;
+import ru.alex.lab1.recycler.RecyclerViewElement;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<ElementType> recyclerViewElementList = new ArrayList<>();
+    List<RecyclerViewElement> recyclerViewElementList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (monstersAdapter.getItemViewType(position) == ElementType.TITLE) {
+                if (monstersAdapter.getItemViewType(position) == RecyclerViewElement.TITLE) {
                     return 2;
                 }
                 return 1;

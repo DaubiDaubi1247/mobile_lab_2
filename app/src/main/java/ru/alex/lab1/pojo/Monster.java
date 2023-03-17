@@ -4,9 +4,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ru.alex.lab1.adapter.MonstersAdapter;
 import ru.alex.lab1.onClickHandler.MonsterOnclickHandler;
-import ru.alex.lab1.recycler.ElementType;
+import ru.alex.lab1.recycler.RecyclerViewElement;
 
-public class Monster implements ElementType {
+public class Monster implements RecyclerViewElement {
 
     private int id;
 
@@ -25,7 +25,7 @@ public class Monster implements ElementType {
 
     @Override
     public int getViewType() {
-        return ElementType.CARDS;
+        return RecyclerViewElement.CARDS;
     }
 
     @Override

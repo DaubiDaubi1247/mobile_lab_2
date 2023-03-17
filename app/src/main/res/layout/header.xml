@@ -27,5 +27,5 @@
     <ImageButton
         style="@style/header_img"
         android:src="@drawable/search"
-        android:layout_marginEnd="5dp" />
+        android:layout_marginEnd="@dimen/header_last_el_margin" />
 </LinearLayout>

@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.alex.lab1.R;
-import ru.alex.lab1.pojo.Monster;
-import ru.alex.lab1.recycler.ElementType;
+import ru.alex.lab1.recycler.RecyclerViewElement;
 
 public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final List<ElementType> elements;
+    private final List<RecyclerViewElement> elements;
 
-    public MonstersAdapter(Context context, List<ElementType> elements) {
+    public MonstersAdapter(Context context, List<RecyclerViewElement> elements) {
         this.elements = elements;
     }
 
@@ -32,7 +31,7 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType == ElementType.TITLE) {
+        if (viewType == RecyclerViewElement.TITLE) {
             return new TitleViewHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.title, parent, false));
         }

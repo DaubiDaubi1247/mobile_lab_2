@@ -5,8 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:backgroundTint="@color/grey"
-    android:layout_marginBottom="20dp"
-    app:cardCornerRadius="16dp">
+    android:layout_marginBottom="@dimen/recycler_view_card_margin_bottom"
+    app:cardCornerRadius="@dimen/recycler_view_card_radius">
 
     <LinearLayout
         android:gravity="center"
@@ -20,9 +20,9 @@
             android:id="@+id/recycler_view_card_title"/>
 
         <ImageView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/recycler_view_card_img_margin"
             android:layout_width="wrap_content"
-            android:layout_height="170dp"
+            android:layout_height="@dimen/recycler_view_card_img_height"
             android:id="@+id/recycler_view_card_img"
             android:src="@drawable/vampire"/>
     </LinearLayout>

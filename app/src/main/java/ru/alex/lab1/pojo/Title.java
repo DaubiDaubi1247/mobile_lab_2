@@ -2,15 +2,15 @@ package ru.alex.lab1.pojo;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import ru.alex.lab1.recycler.ElementType;
+import ru.alex.lab1.recycler.RecyclerViewElement;
 
-public class Title implements ElementType {
+public class Title implements RecyclerViewElement {
     public Title() {
     }
 
     @Override
     public int getViewType() {
-        return ElementType.TITLE;
+        return RecyclerViewElement.TITLE;
     }
 
     @Override
