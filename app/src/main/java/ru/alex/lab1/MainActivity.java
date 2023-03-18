@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(layoutManager);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.footer);
         bottomNavigationView.setSelectedItemId(R.id.page_2);
 
         // получение картинки с моего сервера
