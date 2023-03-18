@@ -10,4 +10,5 @@
     <string name="bottom_nav_bar_person">Персонажи</string>
     <string name="bottom_nav_bar_memes">Мемы</string>
     <string name="bottom_nav_bar_youtube">Youtube</string>
+    <string name="quoteAuthor">Автор :</string>
 </resources>

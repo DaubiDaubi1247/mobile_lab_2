@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="very_big_in_sp">36sp</dimen>
+    <dimen name="big_in_sp">18sp</dimen>
+    <dimen name="medium_in_sp">14sp</dimen>
+    <dimen name="small_in_sp">8sp</dimen>
+
+    <dimen name="container_margin">10dp</dimen>
+
+    <dimen name="recycler_view_card_width">180dp</dimen>
+    <dimen name="recycler_view_card_height">200dp</dimen>
+    <dimen name="recycler_view_card_img_height">170dp</dimen>
+    <dimen name="recycler_view_card_img_margin">10dp</dimen>
+    <dimen name="recycler_view_card_margin_bottom">20dp</dimen>
+    <dimen name="recycler_view_card_radius">16dp</dimen>
+
+    <dimen name="header_img_size">50dp</dimen>
+    <dimen name="header_last_el_margin">5dp</dimen>
+
+    <dimen name="title_btn_height">30dp</dimen>
+    <dimen name="title_card_btn_margin_top">15dp</dimen>
+    <dimen name="title_tile_margin_bottom">20dp</dimen>
+    <dimen name="title_card_margin_bottom">30dp</dimen>
+    <dimen name="title_card_text_container_margin_start">10dp</dimen>
+    <dimen name="title_card_text_container_margin_top">50dp</dimen>
+    <dimen name="title_card_text_description_margin_top">10dp</dimen>
+
+
+    <dimen name="description_card_img_max_height">300dp</dimen>
+    <dimen name="description_card_description_text_margin_top">30dp</dimen>
+    <dimen name="description_card_description_text_margin_bottom">10dp</dimen>
+    <dimen name="description_card_description_description_margin_top">20dp</dimen>
+    <dimen name="description_card_description_description_line_spacing">5dp</dimen>
+</resources>

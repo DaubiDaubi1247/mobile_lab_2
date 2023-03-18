@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="body">
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="title">
-        <item name="android:textSize">30sp</item>
-    </style>
 
     <style name="title_card">
         <item name="cardCornerRadius">16dp</item>

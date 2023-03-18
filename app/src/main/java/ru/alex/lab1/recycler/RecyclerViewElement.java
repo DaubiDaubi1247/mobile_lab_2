@@ -2,7 +2,7 @@ package ru.alex.lab1.recycler;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public interface ElementType {
+public interface RecyclerViewElement {
     int CARDS = 0;
     int TITLE = 1;
 
