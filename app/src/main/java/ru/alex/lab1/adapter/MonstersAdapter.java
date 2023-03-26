@@ -62,6 +62,7 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         private final ImageView monsterImage;
         private final TextView monsterTextView;
+
         public MonsterViewHolder(View itemView) {
             super(itemView);
             monsterImage = itemView.findViewById(R.id.recycler_view_card_img);

@@ -65,6 +65,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewElementList.add(new Monster (4, "Реликты", R.drawable.relict));
         recyclerViewElementList.add(new Monster (5, "Огры", R.drawable.ogr));
         recyclerViewElementList.add(new Monster (6, "Гибриды", R.drawable.gibrid));
-        recyclerViewElementList.add(new Monster (7, "Проклятые", R.drawable.coursed));
+//        recyclerViewElementList.add(new Monster (7, "Проклятые", R.drawable.coursed));
     }
 }
