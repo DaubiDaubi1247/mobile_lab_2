@@ -1,6 +1,7 @@
 package ru.alex.lab1.dto;
 
-import ru.alex.lab1.pojo.MonsterClass;
+import ru.alex.lab1.pojo.MonsterClassCardPreview;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 
 public class MonsterClassDto {
 
@@ -44,7 +45,7 @@ public class MonsterClassDto {
         this.source = source;
     }
 
-    public MonsterClass toPojo() {
-        return new MonsterClass(id, name, source, imgName);
+    public MonsterClassCardPreview toPojo() {
+        return new MonsterClassCardPreview(id, name, source, imgName);
     }
 }

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.alex.lab1.R;
-import ru.alex.lab1.pojo.MonsterClass;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 
 public class MonsterClassAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -80,7 +80,7 @@ public class MonsterClassAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateMonsterCLassList(List<MonsterClass> monsterClassList) {
+    public void updateMonsterCLassList(List<RecyclerCardPreview> monsterClassList) {
         elements.addAll(monsterClassList);
 
         notifyDataSetChanged();

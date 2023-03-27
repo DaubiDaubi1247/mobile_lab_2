@@ -18,7 +18,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import ru.alex.lab1.adapter.MonsterClassAdapter;
 import ru.alex.lab1.dto.MonsterClassDto;
-import ru.alex.lab1.pojo.MonsterClass;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.urls.monster.MonsterUrls;
 
 public class MonsterService extends BaseService {
@@ -53,7 +53,7 @@ public class MonsterService extends BaseService {
 
     }
 
-    private MonsterClass toPojo(MonsterClassDto monsterClassDto) {
-        return new MonsterClass(monsterClassDto.getId(), monsterClassDto.getName(), monsterClassDto.getSource(), monsterClassDto.getImgName());
+    private RecyclerCardPreview toPojo(MonsterClassDto monsterClassDto) {
+        return new RecyclerCardPreview(monsterClassDto.getId(), monsterClassDto.getName(), monsterClassDto.getSource(), monsterClassDto.getImgName());
     }
 }

@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.view.View;
 
 import ru.alex.lab1.activity.CardDescriptionActivity;
-import ru.alex.lab1.pojo.MonsterClass;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 
 public class MonsterOnclickHandler implements View.OnClickListener {
-    private final MonsterClass monster;
+    private final RecyclerCardPreview monster;
 
-    public MonsterOnclickHandler(MonsterClass monster) {
+    public MonsterOnclickHandler(RecyclerCardPreview monster) {
         this.monster = monster;
     }
 
