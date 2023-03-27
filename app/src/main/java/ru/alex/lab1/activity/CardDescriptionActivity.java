@@ -19,8 +19,8 @@ public class CardDescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_description);
 
-        int cardId = getIntent().getIntExtra("id", 1);
-        monsterDto = getMonsterDtoFromServer(cardId);
+        Long cardId = (long) getIntent().getIntExtra("id", 1);
+//        monsterDto = getMonsterDtoFromServer(cardId);
         setMonsterToLayout();
     }
 

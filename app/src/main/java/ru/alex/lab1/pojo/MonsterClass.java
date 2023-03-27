@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import ru.alex.lab1.adapter.MonstersAdapter;
+import ru.alex.lab1.adapter.MonsterClassAdapter;
 import ru.alex.lab1.onClickHandler.MonsterOnclickHandler;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.urls.monster.MonsterUrls;
@@ -42,9 +42,11 @@ public class MonsterClass implements RecyclerViewElement {
 
         MonsterOnclickHandler monsterOnclickHandler = new MonsterOnclickHandler(this);
 
-        MonstersAdapter.MonsterViewHolder monsterViewHolder = (MonstersAdapter.MonsterViewHolder) viewHolder;
+        MonsterClassAdapter.MonsterViewHolder monsterViewHolder = (MonsterClassAdapter.MonsterViewHolder) viewHolder;
         monsterViewHolder.getMonsterTextView().setText(name);
-        Glide.with(monsterViewHolder.getMonsterImage()).load(MonsterUrls.BASE_URL + "img/" + source + imgName).into(monsterViewHolder.getMonsterImage());
+        Glide.with(monsterViewHolder.getMonsterImage())
+                .load(MonsterUrls.BASE_FOR_IMG + source + imgName)
+                .into(monsterViewHolder.getMonsterImage());
         monsterViewHolder.itemView.setOnClickListener(monsterOnclickHandler);
     }
 }

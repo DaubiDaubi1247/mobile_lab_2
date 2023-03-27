@@ -14,8 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.alex.lab1.adapter.MonstersAdapter;
-import ru.alex.lab1.pojo.MonsterClass;
+import ru.alex.lab1.adapter.MonsterClassAdapter;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
@@ -31,11 +30,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
+
+        prepareAndSetRecyclerView();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.footer);
+        bottomNavigationView.setSelectedItemId(R.id.page_2);
+
+    }
+
+    private void prepareAndSetRecyclerView() {
         recyclerViewElementList.add(new Title());
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-        MonstersAdapter monstersAdapter = new MonstersAdapter(this, recyclerViewElementList);
+        MonsterClassAdapter monstersAdapter = new MonsterClassAdapter(this, recyclerViewElementList);
         recyclerView.setAdapter(monstersAdapter);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -51,19 +59,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         setInitialData(monstersAdapter);
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.footer);
-        bottomNavigationView.setSelectedItemId(R.id.page_2);
-
-        // получение картинки с моего сервера
-        //todo спросить можно ли будет с моего сервера тянуть информацию
-//        ImageView imageView = findViewById(R.id.img);
-//
-//        Glide.with(this).load("http://192.168.0.103:8080/api/users/2.png").into(imageView);
     }
 
-    public void setInitialData(MonstersAdapter monstersAdapter) {
+    private void setInitialData(MonsterClassAdapter monstersAdapter) {
         monsterService.getMonsterClassList(monstersAdapter);
-//        recyclerViewElementList.add(new Monster (7, "Проклятые", R.drawable.coursed));
     }
 }

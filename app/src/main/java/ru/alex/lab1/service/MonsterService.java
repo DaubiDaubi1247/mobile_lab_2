@@ -1,12 +1,9 @@
 package ru.alex.lab1.service;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
@@ -19,11 +16,9 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
-import ru.alex.lab1.MainActivity;
-import ru.alex.lab1.adapter.MonstersAdapter;
+import ru.alex.lab1.adapter.MonsterClassAdapter;
 import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.pojo.MonsterClass;
-import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.urls.monster.MonsterUrls;
 
 public class MonsterService extends BaseService {
@@ -34,7 +29,7 @@ public class MonsterService extends BaseService {
         this.context = context;
     }
 
-    public void getMonsterClassList(MonstersAdapter monstersAdapter) {
+    public void getMonsterClassList(MonsterClassAdapter monstersAdapter) {
         Request request = new Request.Builder()
                 .url(MonsterUrls.GET_ALL_MONSTERS)
                 .build();
@@ -53,7 +48,6 @@ public class MonsterService extends BaseService {
                 context.runOnUiThread(() -> monstersAdapter.updateMonsterCLassList(monsterClassDtoList.stream()
                         .map(MonsterClassDto::toPojo)
                         .collect(Collectors.toList())));
-
             }
         });
 
