@@ -10,7 +10,6 @@ import android.widget.TextView;
 import ru.alex.lab1.R;
 import ru.alex.lab1.db.DataBase;
 import ru.alex.lab1.dto.MonsterDto;
-import ru.alex.lab1.pojo.Monster;
 
 public class CardDescriptionActivity extends AppCompatActivity {
 

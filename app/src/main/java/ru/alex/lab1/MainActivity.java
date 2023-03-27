@@ -15,11 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.alex.lab1.adapter.MonstersAdapter;
-import ru.alex.lab1.pojo.Monster;
+import ru.alex.lab1.pojo.MonsterClass;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
+import ru.alex.lab1.service.MonsterService;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final MonsterService monsterService = new MonsterService(this);
 
     List<RecyclerViewElement> recyclerViewElementList = new ArrayList<>();
 
@@ -28,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES);
+        recyclerViewElementList.add(new Title());
 
-        setInitialData();
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         MonstersAdapter monstersAdapter = new MonstersAdapter(this, recyclerViewElementList);
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(layoutManager);
 
+        setInitialData(monstersAdapter);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.footer);
         bottomNavigationView.setSelectedItemId(R.id.page_2);
 
@@ -57,14 +62,8 @@ public class MainActivity extends AppCompatActivity {
 //        Glide.with(this).load("http://192.168.0.103:8080/api/users/2.png").into(imageView);
     }
 
-    private void setInitialData(){
-        recyclerViewElementList.add(new Title());
-        recyclerViewElementList.add(new Monster (1, "Вампиры", R.drawable.vampire));
-        recyclerViewElementList.add(new Monster (2, "Духи и призраки", R.drawable.ghost));
-        recyclerViewElementList.add(new Monster (3, "Дракониды", R.drawable.draconid));
-        recyclerViewElementList.add(new Monster (4, "Реликты", R.drawable.relict));
-        recyclerViewElementList.add(new Monster (5, "Огры", R.drawable.ogr));
-        recyclerViewElementList.add(new Monster (6, "Гибриды", R.drawable.gibrid));
+    public void setInitialData(MonstersAdapter monstersAdapter) {
+        monsterService.getMonsterClassList(monstersAdapter);
 //        recyclerViewElementList.add(new Monster (7, "Проклятые", R.drawable.coursed));
     }
 }

@@ -2,26 +2,35 @@ package ru.alex.lab1.pojo;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import ru.alex.lab1.adapter.MonstersAdapter;
 import ru.alex.lab1.onClickHandler.MonsterOnclickHandler;
 import ru.alex.lab1.recycler.RecyclerViewElement;
+import ru.alex.lab1.urls.monster.MonsterUrls;
 
-public class Monster implements RecyclerViewElement {
+public class MonsterClass implements RecyclerViewElement {
+    public MonsterClass() {
+    }
 
-    private int id;
+    private Long id;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    private final String name;
-    private final int imgResource;
+    private String name;
 
-    public Monster(int id, String name, int imgResource) {
+    private String source;
+    private String imgName;
+
+    public MonsterClass(Long id, String name, String source, String imgName) {
         this.id = id;
         this.name = name;
-        this.imgResource = imgResource;
+        this.source = source;
+        this.imgName = imgName;
     }
+
 
     @Override
     public int getViewType() {
@@ -35,7 +44,7 @@ public class Monster implements RecyclerViewElement {
 
         MonstersAdapter.MonsterViewHolder monsterViewHolder = (MonstersAdapter.MonsterViewHolder) viewHolder;
         monsterViewHolder.getMonsterTextView().setText(name);
-        monsterViewHolder.getMonsterImage().setImageResource(imgResource);
+        Glide.with(monsterViewHolder.getMonsterImage()).load(MonsterUrls.BASE_URL + "img/" + source + imgName).into(monsterViewHolder.getMonsterImage());
         monsterViewHolder.itemView.setOnClickListener(monsterOnclickHandler);
     }
 }

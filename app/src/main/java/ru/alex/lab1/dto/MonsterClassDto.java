@@ -1,5 +1,7 @@
 package ru.alex.lab1.dto;
 
+import ru.alex.lab1.pojo.MonsterClass;
+
 public class MonsterClassDto {
 
     private Long id;
@@ -40,5 +42,9 @@ public class MonsterClassDto {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public MonsterClass toPojo() {
+        return new MonsterClass(id, name, source, imgName);
     }
 }

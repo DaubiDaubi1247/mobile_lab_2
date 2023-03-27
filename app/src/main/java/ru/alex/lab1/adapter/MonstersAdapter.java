@@ -1,5 +1,6 @@
 package ru.alex.lab1.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.alex.lab1.R;
+import ru.alex.lab1.pojo.MonsterClass;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 
 public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -75,6 +77,13 @@ public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public TitleViewHolder(@NonNull View itemView) {
             super(itemView);
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateMonsterCLassList(List<MonsterClass> monsterClassList) {
+        elements.addAll(monsterClassList);
+
+        notifyDataSetChanged();
     }
 
 }
