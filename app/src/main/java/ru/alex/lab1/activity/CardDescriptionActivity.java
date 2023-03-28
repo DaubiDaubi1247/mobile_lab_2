@@ -9,18 +9,18 @@ import android.widget.TextView;
 
 import ru.alex.lab1.R;
 import ru.alex.lab1.db.DataBase;
-import ru.alex.lab1.dto.MonsterDto;
+import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 
 public class CardDescriptionActivity extends AppCompatActivity {
 
-    private MonsterDto monsterDto;
+    private MonsterWithDescriptionDto monsterDto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_description);
 
-        Long cardId = (long) getIntent().getIntExtra("id", 1);
-//        monsterDto = getMonsterDtoFromServer(cardId);
+        int cardId =  getIntent().getIntExtra("id", 1);
+        monsterDto = getMonsterDtoFromServer(cardId);
         setMonsterToLayout();
     }
 
@@ -43,7 +43,7 @@ public class CardDescriptionActivity extends AppCompatActivity {
         textView.setText(monsterDto.getDescription());
     }
 
-    private MonsterDto getMonsterDtoFromServer(int id) {
+    private MonsterWithDescriptionDto getMonsterDtoFromServer(int id) {
         return DataBase.getInstance().getMonsterById(id);
     }
 }

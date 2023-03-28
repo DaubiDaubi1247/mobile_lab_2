@@ -17,10 +17,10 @@ import ru.alex.lab1.R;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 
-public class MonsterClassAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CardPreviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<RecyclerViewElement> elements;
 
-    public MonsterClassAdapter(Context context, List<RecyclerViewElement> elements) {
+    public CardPreviewAdapter(Context context, List<RecyclerViewElement> elements) {
         this.elements = elements;
     }
 

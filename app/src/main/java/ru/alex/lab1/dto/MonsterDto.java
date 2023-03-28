@@ -1,37 +1,12 @@
 package ru.alex.lab1.dto;
 
-public class MonsterDto {
-    private int imgRes;
-    private String name;
-    private String quote;
-    private String quoteAuthor;
-    private String description;
+import ru.alex.lab1.pojo.MonsterCardPreview;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 
-    public String getQuoteAuthor() {
-        return quoteAuthor;
-    }
+public class MonsterDto extends BaseCardPreviewDto{
 
-    public MonsterDto(int imgRes, String name, String quote, String quoteAuthor, String description) {
-        this.imgRes = imgRes;
-        this.name = name;
-        this.quote = quote;
-        this.quoteAuthor = quoteAuthor;
-        this.description = description;
-    }
-
-    public int getImgRes() {
-        return imgRes;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getQuote() {
-        return quote;
-    }
-
-    public String getDescription() {
-        return description;
+    @Override
+    public RecyclerCardPreview toPojo() {
+        return new MonsterCardPreview(id, name, source, imgName);
     }
 }

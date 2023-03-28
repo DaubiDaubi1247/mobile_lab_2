@@ -16,9 +16,9 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
-import ru.alex.lab1.adapter.MonsterClassAdapter;
+import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.dto.MonsterClassDto;
-import ru.alex.lab1.pojo.RecyclerCardPreview;
+import ru.alex.lab1.dto.MonsterDto;
 import ru.alex.lab1.urls.monster.MonsterUrls;
 
 public class MonsterService extends BaseService {
@@ -29,9 +29,9 @@ public class MonsterService extends BaseService {
         this.context = context;
     }
 
-    public void getMonsterClassList(MonsterClassAdapter monstersAdapter) {
+    public void getMonsterClassList(CardPreviewAdapter monstersAdapter) {
         Request request = new Request.Builder()
-                .url(MonsterUrls.GET_ALL_MONSTERS)
+                .url(MonsterUrls.GET_ALL_MONSTER_CLASS)
                 .build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -53,7 +53,27 @@ public class MonsterService extends BaseService {
 
     }
 
-    private RecyclerCardPreview toPojo(MonsterClassDto monsterClassDto) {
-        return new RecyclerCardPreview(monsterClassDto.getId(), monsterClassDto.getName(), monsterClassDto.getSource(), monsterClassDto.getImgName());
+    public void getMonsterListByClassId(CardPreviewAdapter monstersAdapter, Long id) {
+        Request request = new Request.Builder()
+                .url(MonsterUrls.GET_ALL_MONSTERS + id)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(@NonNull Call call, @NonNull IOException
+                    error) {
+                error.printStackTrace();
+            }
+            @Override public void onResponse(@NonNull Call call, @NonNull Response
+                    response) throws IOException {
+                Type listOfMyClassObject = new TypeToken<ArrayList<MonsterDto>>() {}.getType();
+                assert response.body() != null;
+                List<MonsterDto> monsterClassDtoList = gson.fromJson(response.body().string(), listOfMyClassObject);
+
+                context.runOnUiThread(() -> monstersAdapter.updateMonsterCLassList(monsterClassDtoList.stream()
+                        .map(MonsterDto::toPojo)
+                        .collect(Collectors.toList())));
+            }
+        });
+
     }
 }

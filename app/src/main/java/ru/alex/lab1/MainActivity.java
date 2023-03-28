@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.alex.lab1.adapter.MonsterClassAdapter;
+import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-        MonsterClassAdapter monstersAdapter = new MonsterClassAdapter(this, recyclerViewElementList);
+        CardPreviewAdapter monstersAdapter = new CardPreviewAdapter(this, recyclerViewElementList);
         recyclerView.setAdapter(monstersAdapter);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setInitialData(monstersAdapter);
     }
 
-    private void setInitialData(MonsterClassAdapter monstersAdapter) {
+    private void setInitialData(CardPreviewAdapter monstersAdapter) {
         monsterService.getMonsterClassList(monstersAdapter);
     }
 }

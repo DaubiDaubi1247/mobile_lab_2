@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import ru.alex.lab1.adapter.MonsterClassAdapter;
-import ru.alex.lab1.onClickHandler.MonsterOnclickHandler;
+import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.urls.monster.MonsterUrls;
 
@@ -46,7 +45,7 @@ public class RecyclerCardPreview implements RecyclerViewElement {
     @Override
     public void onBindHandler(RecyclerView.ViewHolder viewHolder) {
 
-        MonsterClassAdapter.MonsterViewHolder monsterViewHolder = (MonsterClassAdapter.MonsterViewHolder) viewHolder;
+        CardPreviewAdapter.MonsterViewHolder monsterViewHolder = (CardPreviewAdapter.MonsterViewHolder) viewHolder;
         monsterViewHolder.getMonsterTextView().setText(name);
 
         Glide.with(monsterViewHolder.getMonsterImage())
