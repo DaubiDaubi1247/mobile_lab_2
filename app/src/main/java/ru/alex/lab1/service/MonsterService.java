@@ -16,9 +16,12 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
+import ru.alex.lab1.activity.CardDescriptionActivity;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
+import ru.alex.lab1.callBack.monster.MonsterByIdCallBack;
 import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.dto.MonsterDto;
+import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 import ru.alex.lab1.urls.monster.MonsterUrls;
 
 public class MonsterService extends BaseService {
@@ -72,6 +75,29 @@ public class MonsterService extends BaseService {
                 context.runOnUiThread(() -> monstersAdapter.updateMonsterCLassList(monsterClassDtoList.stream()
                         .map(MonsterDto::toPojo)
                         .collect(Collectors.toList())));
+            }
+        });
+
+    }
+
+    public void getMonsterById(Long id, MonsterByIdCallBack callBack) {
+        Request request = new Request.Builder()
+                .url(MonsterUrls.MONSTER + id)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(@NonNull Call call, @NonNull IOException
+                    error) {
+                error.printStackTrace();
+            }
+            @Override public void onResponse(@NonNull Call call, @NonNull Response
+                    response) throws IOException {
+
+                assert response.body() != null;
+                MonsterWithDescriptionDto monsterWithDescriptionDto = gson.fromJson(response.body().string(),
+                        MonsterWithDescriptionDto.class);
+
+                context.runOnUiThread(() -> callBack.onSuccess(monsterWithDescriptionDto));
             }
         });
 

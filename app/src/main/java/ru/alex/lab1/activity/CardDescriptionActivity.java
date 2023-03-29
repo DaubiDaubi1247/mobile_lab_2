@@ -1,30 +1,35 @@
 package ru.alex.lab1.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
+
 import ru.alex.lab1.R;
+import ru.alex.lab1.callBack.monster.MonsterByIdCallBack;
 import ru.alex.lab1.db.DataBase;
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
+import ru.alex.lab1.service.MonsterService;
 
-public class CardDescriptionActivity extends AppCompatActivity {
+public class CardDescriptionActivity extends AppCompatActivity implements MonsterByIdCallBack {
 
-    private MonsterWithDescriptionDto monsterDto;
+    private final MonsterService monsterService = new MonsterService(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_description);
 
-        int cardId =  getIntent().getIntExtra("id", 1);
-        monsterDto = getMonsterDtoFromServer(cardId);
-        setMonsterToLayout();
+        long cardId = getIntent().getLongExtra("id", 1);
+        monsterService.getMonsterById(cardId, this);
     }
 
-    private void setMonsterToLayout() {
+    @Override
+    public void onSuccess(MonsterWithDescriptionDto monsterDto) {
         ImageView imageView = findViewById(R.id.card_description_img);
         imageView.setImageResource(monsterDto.getImgRes());
 
@@ -43,7 +48,8 @@ public class CardDescriptionActivity extends AppCompatActivity {
         textView.setText(monsterDto.getDescription());
     }
 
-    private MonsterWithDescriptionDto getMonsterDtoFromServer(int id) {
-        return DataBase.getInstance().getMonsterById(id);
+    @Override
+    public void onFail(IOException error) {
+
     }
 }
