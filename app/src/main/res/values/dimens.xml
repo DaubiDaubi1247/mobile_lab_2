@@ -25,7 +25,7 @@
     <dimen name="title_card_text_container_margin_top">50dp</dimen>
     <dimen name="title_card_text_description_margin_top">10dp</dimen>
 
-    <dimen name="description_card_img_max_height">300dp</dimen>
+    <dimen name="description_card_img_max_height">150dp</dimen>
     <dimen name="description_card_description_text_margin_top">30dp</dimen>
     <dimen name="description_card_description_text_margin_bottom">10dp</dimen>
     <dimen name="description_card_description_description_margin_top">20dp</dimen>
