@@ -26,6 +26,8 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_description);
 
+        findViewById(R.id.card_description_scroll).setVerticalScrollBarEnabled(false);
+
         long cardId = getIntent().getLongExtra("id", 1);
         monsterService.getMonsterById(cardId, this);
     }
