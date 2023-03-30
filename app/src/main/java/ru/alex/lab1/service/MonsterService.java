@@ -37,51 +37,21 @@ public class MonsterService extends BaseService {
         this.context = context;
     }
 
-    public void getMonsterClassList(CardPreviewAdapter monstersAdapter) {
+    public void getMonsterClassList(MonsterCallBack callBack) {
         Request request = new Request.Builder()
                 .url(MonsterUrls.GET_ALL_MONSTER_CLASS)
                 .build();
 
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override public void onFailure(@NonNull Call call, @NonNull IOException
-                    error) {
-                error.printStackTrace();
-            }
-            @Override public void onResponse(@NonNull Call call, @NonNull Response
-                    response) throws IOException {
-                Type listOfMyClassObject = new TypeToken<ArrayList<MonsterClassDto>>() {}.getType();
-                assert response.body() != null;
-                List<MonsterClassDto> monsterClassDtoList = gson.fromJson(response.body().string(), listOfMyClassObject);
-
-                context.runOnUiThread(() -> monstersAdapter.updateMonsterCLassList(monsterClassDtoList.stream()
-                        .map(MonsterClassDto::toPojo)
-                        .collect(Collectors.toList())));
-            }
-        });
+        makeRequest(callBack, request);
 
     }
 
-    public void getMonsterListByClassId(CardPreviewAdapter monstersAdapter, Long id) {
+    public void getMonsterListByClassId(Long id, MonsterCallBack callBack) {
         Request request = new Request.Builder()
                 .url(MonsterUrls.GET_ALL_MONSTERS + id)
                 .build();
 
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override public void onFailure(@NonNull Call call, @NonNull IOException
-                    error) {
-                error.printStackTrace();
-            }
-            @Override public void onResponse(@NonNull Call call, @NonNull Response
-                    response) throws IOException {
-                Type listOfMyClassObject = new TypeToken<ArrayList<MonsterDto>>() {}.getType();
-                assert response.body() != null;
-                List<MonsterDto> monsterClassDtoList = gson.fromJson(response.body().string(), listOfMyClassObject);
-
-                context.runOnUiThread(() -> monstersAdapter.updateMonsterCLassList(monsterClassDtoList.stream()
-                        .map(MonsterDto::toPojo)
-                        .collect(Collectors.toList())));
-            }
-        });
+        makeRequest(callBack, request);
 
     }
 
@@ -90,6 +60,10 @@ public class MonsterService extends BaseService {
                 .url(MonsterUrls.MONSTER + id)
                 .build();
 
+        makeRequest(callBack, request);
+    }
+
+    private void makeRequest(MonsterCallBack callBack, Request request) {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(@NonNull Call call, @NonNull IOException
                     error) {
@@ -114,6 +88,5 @@ public class MonsterService extends BaseService {
                 context.runOnUiThread(() -> callBack.onSuccess(responseBody));
             }
         });
-
     }
 }

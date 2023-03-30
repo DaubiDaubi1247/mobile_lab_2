@@ -7,4 +7,5 @@ import okhttp3.OkHttpClient;
 public class BaseService {
 
    static OkHttpClient okHttpClient = new OkHttpClient();
+
 }

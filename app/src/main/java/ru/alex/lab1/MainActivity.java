@@ -11,19 +11,34 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import ru.alex.lab1.adapter.CardPreviewAdapter;
+import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
+import ru.alex.lab1.utils.converter.Impl.MonsterConverterImpl;
+import ru.alex.lab1.utils.converter.MonsterConverter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MonsterCallBack {
 
-    private final MonsterService monsterService = new MonsterService(this);
+    private final MonsterService monsterService;
 
-    List<RecyclerViewElement> recyclerViewElementList = new ArrayList<>();
+    private final List<RecyclerViewElement> recyclerViewElementList;
+
+    private final CardPreviewAdapter monsterAdapter;
+
+    private final MonsterConverter monsterConverter;
+
+    public MainActivity() {
+        this.monsterService = new MonsterService(this);
+        this.recyclerViewElementList = new ArrayList<>();
+        this.monsterAdapter = new CardPreviewAdapter(this, recyclerViewElementList);
+        this.monsterConverter = new MonsterConverterImpl();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +58,13 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-        CardPreviewAdapter monstersAdapter = new CardPreviewAdapter(this, recyclerViewElementList);
-        recyclerView.setAdapter(monstersAdapter);
+        recyclerView.setAdapter(monsterAdapter);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (monstersAdapter.getItemViewType(position) == RecyclerViewElement.TITLE) {
+                if (monsterAdapter.getItemViewType(position) == RecyclerViewElement.TITLE) {
                     return 2;
                 }
                 return 1;
@@ -58,10 +72,20 @@ public class MainActivity extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(layoutManager);
 
-        setInitialData(monstersAdapter);
+        setInitialData();
     }
 
-    private void setInitialData(CardPreviewAdapter monstersAdapter) {
-        monsterService.getMonsterClassList(monstersAdapter);
+    private void setInitialData() {
+         monsterService.getMonsterClassList(this);
+    }
+
+    @Override
+    public void onSuccess(String responseInString) {
+        monsterAdapter.updateMonsterCLassList(monsterConverter.toMonsterClassDtoList(responseInString));
+    }
+
+    @Override
+    public void onFail(IOException error) {
+
     }
 }
