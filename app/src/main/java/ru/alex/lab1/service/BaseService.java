@@ -5,6 +5,6 @@ import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 
 public class BaseService {
-   static Gson gson = new Gson();
+
    static OkHttpClient okHttpClient = new OkHttpClient();
 }

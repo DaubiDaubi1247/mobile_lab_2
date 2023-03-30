@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 
-public interface MonsterByIdCallBack {
-    void onSuccess(MonsterWithDescriptionDto monster);
+public interface MonsterCallBack {
+    void onSuccess(String responseInString);
     void onFail(IOException error);
 }

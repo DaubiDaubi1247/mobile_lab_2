@@ -12,14 +12,17 @@ import com.bumptech.glide.Glide;
 import java.io.IOException;
 
 import ru.alex.lab1.R;
-import ru.alex.lab1.callBack.monster.MonsterByIdCallBack;
+import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.urls.BaseUrl;
+import ru.alex.lab1.utils.converter.Impl.MonsterConverterImpl;
+import ru.alex.lab1.utils.converter.MonsterConverter;
 
-public class CardDescriptionActivity extends AppCompatActivity implements MonsterByIdCallBack {
+public class CardDescriptionActivity extends AppCompatActivity implements MonsterCallBack {
 
     private final MonsterService monsterService = new MonsterService(this);
+    private final MonsterConverter monsterConverter = new MonsterConverterImpl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,10 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
     }
 
     @Override
-    public void onSuccess(MonsterWithDescriptionDto monsterDto) {
+    public void onSuccess(String responseInString) {
+
+        MonsterWithDescriptionDto monsterDto = monsterConverter.toMonsterWithDesc(responseInString);
+
         ImageView imageView = findViewById(R.id.card_description_img);
         Glide.with(this)
                 .load(BaseUrl.BASE_FOR_IMG + monsterDto.getSource() + monsterDto.getImgName()).into(imageView);
