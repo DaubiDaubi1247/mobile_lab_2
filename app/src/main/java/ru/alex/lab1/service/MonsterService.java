@@ -43,7 +43,6 @@ public class MonsterService extends BaseService {
                 .build();
 
         makeRequest(callBack, request);
-
     }
 
     public void getMonsterListByClassId(Long id, MonsterCallBack callBack) {
@@ -52,7 +51,6 @@ public class MonsterService extends BaseService {
                 .build();
 
         makeRequest(callBack, request);
-
     }
 
     public void getMonsterById(Long id, MonsterCallBack callBack) {
@@ -72,6 +70,7 @@ public class MonsterService extends BaseService {
             @Override public void onResponse(@NonNull Call call, @NonNull Response
                     response) throws IOException {
 
+                assert response.body() != null;
                 String responseBody = response.body().string();
 
                 if (!response.isSuccessful()) {

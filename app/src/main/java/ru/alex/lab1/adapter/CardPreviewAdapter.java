@@ -1,7 +1,6 @@
 package ru.alex.lab1.adapter;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import ru.alex.lab1.recycler.RecyclerViewElement;
 public class CardPreviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<RecyclerViewElement> elements;
 
-    public CardPreviewAdapter(Context context, List<RecyclerViewElement> elements) {
+    public CardPreviewAdapter(List<RecyclerViewElement> elements) {
         this.elements = elements;
     }
 
@@ -80,7 +79,7 @@ public class CardPreviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateMonsterCLassList(List<RecyclerCardPreview> monsterClassList) {
+    public void updateCardPreviewRecycler(List<RecyclerCardPreview> monsterClassList) {
         elements.addAll(monsterClassList);
 
         notifyDataSetChanged();

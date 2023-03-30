@@ -8,14 +8,10 @@ import android.os.Bundle;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import ru.alex.lab1.R;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.callBack.monster.MonsterCallBack;
-import ru.alex.lab1.dto.MonsterDto;
-import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.MonsterConverterImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
@@ -30,7 +26,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
 
     public MonsterListActivity() {
         this.monsterService = new MonsterService(this);
-        this.cardPreviewAdapter = new CardPreviewAdapter(this, new ArrayList<>());
+        this.cardPreviewAdapter = new CardPreviewAdapter(new ArrayList<>());
     }
 
     @Override
@@ -54,7 +50,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
 
     @Override
     public void onSuccess(String responseInString) {
-        cardPreviewAdapter.updateMonsterCLassList(monsterConverter.toMonsterDtoList(responseInString));
+        cardPreviewAdapter.updateCardPreviewRecycler(monsterConverter.toMonsterDtoList(responseInString));
     }
 
     @Override

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
     public MainActivity() {
         this.monsterService = new MonsterService(this);
         this.recyclerViewElementList = new ArrayList<>();
-        this.monsterAdapter = new CardPreviewAdapter(this, recyclerViewElementList);
+        this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
         this.monsterConverter = new MonsterConverterImpl();
     }
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
 
     @Override
     public void onSuccess(String responseInString) {
-        monsterAdapter.updateMonsterCLassList(monsterConverter.toMonsterClassDtoList(responseInString));
+        monsterAdapter.updateCardPreviewRecycler(monsterConverter.toMonsterClassDtoList(responseInString));
     }
 
     @Override
