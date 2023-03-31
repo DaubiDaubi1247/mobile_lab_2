@@ -20,6 +20,10 @@ public class RecyclerCardPreview implements RecyclerViewElement {
 
     private final String name;
 
+    public String getName() {
+        return name;
+    }
+
     private final String source;
     private final String imgName;
 

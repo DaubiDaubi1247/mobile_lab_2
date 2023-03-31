@@ -20,7 +20,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
 
     private final MonsterService monsterService;
 
-    private final CardPreviewAdapter  cardPreviewAdapter;
+    private final CardPreviewAdapter cardPreviewAdapter;
 
     private final MonsterConverter monsterConverter = new MonsterConverterImpl();
 

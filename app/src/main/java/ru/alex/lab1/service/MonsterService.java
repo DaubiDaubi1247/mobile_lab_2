@@ -31,7 +31,6 @@ import ru.alex.lab1.urls.monster.MonsterUrls;
 public class MonsterService extends BaseService {
 
     private final Activity context;
-    Gson gson = new Gson();
 
     public MonsterService(Activity context) {
         this.context = context;
