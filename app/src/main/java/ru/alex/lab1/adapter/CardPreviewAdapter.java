@@ -37,6 +37,11 @@ public class CardPreviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .inflate(R.layout.title, parent, false));
         }
 
+        if (viewType == RecyclerViewElement.MONSTER_LIST_TITLE) {
+            return new MonsterTitleViewHolder(LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.monster_list_title, parent, false));
+        }
+
         return new MonsterViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_view_card, parent, false));
     }
@@ -75,6 +80,20 @@ public class CardPreviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public static class TitleViewHolder extends RecyclerView.ViewHolder {
         public TitleViewHolder(@NonNull View itemView) {
             super(itemView);
+        }
+    }
+
+    public static class MonsterTitleViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView textView;
+
+        public TextView getTextView() {
+            return textView;
+        }
+
+        public MonsterTitleViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.textView = itemView.findViewById(R.id.monster_list_title_text);
         }
     }
 

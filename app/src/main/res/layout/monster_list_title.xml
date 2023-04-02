@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:showIn="@layout/activity_monster_list_acitvity"
+    android:id="@+id/monster_list_title"
+    android:gravity="center"
+    android:layout_marginBottom="20dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/monster_list_title_text"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/very_big_in_sp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+

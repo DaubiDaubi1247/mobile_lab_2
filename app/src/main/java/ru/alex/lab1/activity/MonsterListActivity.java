@@ -8,10 +8,13 @@ import android.os.Bundle;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.alex.lab1.R;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.callBack.monster.MonsterCallBack;
+import ru.alex.lab1.pojo.MonsterListTitle;
+import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.MonsterConverterImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
@@ -20,13 +23,14 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
 
     private final MonsterService monsterService;
 
-    private final CardPreviewAdapter cardPreviewAdapter;
+    List<RecyclerViewElement> recyclerViewElementList;
+    private CardPreviewAdapter cardPreviewAdapter;
 
     private final MonsterConverter monsterConverter = new MonsterConverterImpl();
 
     public MonsterListActivity() {
+        recyclerViewElementList = new ArrayList<>();
         this.monsterService = new MonsterService(this);
-        this.cardPreviewAdapter = new CardPreviewAdapter(new ArrayList<>());
     }
 
     @Override
@@ -35,11 +39,23 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
         setContentView(R.layout.activity_monster_list_acitvity);
 
         long id = getIntent().getLongExtra("id", 1);
+        String title = getIntent().getStringExtra("title");
+        recyclerViewElementList.add(new MonsterListTitle(title));
+        cardPreviewAdapter = new CardPreviewAdapter(recyclerViewElementList);
 
         RecyclerView recyclerView = findViewById(R.id.monster_list_recycler);
 
         setInitialData(id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (cardPreviewAdapter.getItemViewType(position) == RecyclerViewElement.MONSTER_LIST_TITLE) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
         recyclerView.setAdapter(cardPreviewAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
     }
