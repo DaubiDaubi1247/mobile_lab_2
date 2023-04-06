@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import ru.alex.lab1.R;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.urls.monster.MonsterUrls;
@@ -54,6 +55,8 @@ public class RecyclerCardPreview implements RecyclerViewElement {
 
         Glide.with(monsterViewHolder.getMonsterImage())
                 .load(MonsterUrls.BASE_FOR_IMG + source + imgName)
+                .thumbnail(Glide.with(monsterViewHolder.getMonsterImage()).load(R.drawable.preloader))
+                .fitCenter()
                 .into(monsterViewHolder.getMonsterImage());
 
         monsterViewHolder.itemView.setOnClickListener(onClickListener);

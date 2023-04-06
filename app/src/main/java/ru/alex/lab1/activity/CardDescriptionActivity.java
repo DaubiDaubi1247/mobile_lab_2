@@ -42,7 +42,10 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
 
         ImageView imageView = findViewById(R.id.card_description_img);
         Glide.with(this)
-                .load(BaseUrl.BASE_FOR_IMG + monsterDto.getSource() + monsterDto.getImgName()).into(imageView);
+                .load(BaseUrl.BASE_FOR_IMG + monsterDto.getSource() + monsterDto.getImgName())
+                .thumbnail(Glide.with(this).load(R.drawable.preloader))
+                .fitCenter()
+                .into(imageView);
 
         TextView textView = findViewById(R.id.card_description_name);
         textView.setText(monsterDto.getName());

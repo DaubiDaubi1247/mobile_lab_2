@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +74,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
     }
 
     @Override
-    public void onFail(IOException error) {
+    public void onFail(IOException error) throws JSONException {
 
     }
 }
