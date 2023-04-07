@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.pojo.MonsterListTitle;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
-import ru.alex.lab1.utils.converter.Impl.MonsterConverterImpl;
+import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 
 public class MonsterListActivity extends AppCompatActivity implements MonsterCallBack {
@@ -30,7 +28,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
     List<RecyclerViewElement> recyclerViewElementList;
     private CardPreviewAdapter cardPreviewAdapter;
 
-    private final MonsterConverter monsterConverter = new MonsterConverterImpl();
+    private final MonsterConverter monsterConverter = new GsonMonsterConverterImpl();
 
     public MonsterListActivity() {
         recyclerViewElementList = new ArrayList<>();
@@ -43,6 +41,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
         setContentView(R.layout.activity_monster_list_acitvity);
 
         long id = getIntent().getLongExtra("id", 1);
+
         String title = getIntent().getStringExtra("title");
         recyclerViewElementList.add(new MonsterListTitle(title));
         cardPreviewAdapter = new CardPreviewAdapter(recyclerViewElementList);
@@ -50,6 +49,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
         RecyclerView recyclerView = findViewById(R.id.monster_list_recycler);
 
         setInitialData(id);
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -74,7 +74,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
     }
 
     @Override
-    public void onFail(IOException error) throws JSONException {
+    public void onFail(IOException error){
 
     }
 }

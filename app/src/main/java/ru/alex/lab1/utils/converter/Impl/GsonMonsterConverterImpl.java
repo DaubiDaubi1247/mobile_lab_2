@@ -14,7 +14,7 @@ import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 
-public class MonsterConverterImpl implements MonsterConverter {
+public class GsonMonsterConverterImpl implements MonsterConverter {
 
     static Gson gson = new Gson();
 

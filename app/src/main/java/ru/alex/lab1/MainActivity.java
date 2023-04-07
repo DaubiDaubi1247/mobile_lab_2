@@ -20,7 +20,7 @@ import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
-import ru.alex.lab1.utils.converter.Impl.MonsterConverterImpl;
+import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 
 public class MainActivity extends AppCompatActivity implements MonsterCallBack {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
         this.monsterService = new MonsterService(this);
         this.recyclerViewElementList = new ArrayList<>();
         this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
-        this.monsterConverter = new MonsterConverterImpl();
+        this.monsterConverter = new GsonMonsterConverterImpl();
     }
 
     @Override
