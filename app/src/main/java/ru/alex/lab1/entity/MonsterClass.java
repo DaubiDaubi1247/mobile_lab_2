@@ -45,6 +45,10 @@ public class MonsterClass {
         return imgDirection;
     }
 
+    public static MonsterClassBuilder builder() {
+        return new MonsterClassBuilder();
+    }
+
     public static class MonsterClassBuilder {
         private Long id;
 
@@ -54,22 +58,21 @@ public class MonsterClass {
 
         private String imgDirection;
 
-        MonsterClassBuilder builder() {
-            return new MonsterClassBuilder();
+        public MonsterClassBuilder() {
         }
 
-        MonsterClassBuilder id(Long id) {
+        public MonsterClassBuilder id(Long id) {
             this.id = id;
             return this;
         }
 
-        MonsterClassBuilder name(String name) {
+        public MonsterClassBuilder name(String name) {
             this.name = name;
             return this;
         }
 
-        MonsterClass build() {
-            return new MonsterClass(id, name, null, null);
+        public MonsterClass build() {
+            return new MonsterClass(this.id, name, null, null);
         }
 
     }
