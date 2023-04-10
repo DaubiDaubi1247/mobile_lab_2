@@ -4,13 +4,13 @@ import ru.alex.lab1.pojo.RecyclerCardPreview;
 
 public abstract class BaseCardPreviewDto {
 
-    protected Long id;
+    public Long id;
 
-    protected String name;
+    public String name;
 
-    protected String imgName;
+    public String imgName;
 
-    protected String source;
+    public String source;
 
     public abstract RecyclerCardPreview toPojo();
 }

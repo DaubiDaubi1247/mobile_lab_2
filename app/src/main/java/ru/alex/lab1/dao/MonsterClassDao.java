@@ -16,6 +16,9 @@ public interface MonsterClassDao {
     @Query("SELECT * FROM monster_class ")
     List<MonsterClassDto> getAll();
 
+    @Query("DELETE FROM monster_class")
+    void nukeTable();
+
     @Insert
     void insertAll(List<MonsterClass> monsterClassList);
 

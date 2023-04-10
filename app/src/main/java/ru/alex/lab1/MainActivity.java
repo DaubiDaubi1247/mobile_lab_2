@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,14 +16,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.callBack.monster.MonsterCallBack;
+import ru.alex.lab1.dao.MonsterClassDao;
+import ru.alex.lab1.db.AppDataBase;
+import ru.alex.lab1.dto.MonsterClassDto;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
+import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
+import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
 public class MainActivity extends AppCompatActivity implements MonsterCallBack {
 
@@ -32,12 +41,14 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
     private final CardPreviewAdapter monsterAdapter;
 
     private final MonsterConverter monsterConverter;
+    private final MonsterConverterDb monsterConverterDb;
 
     public MainActivity() {
         this.monsterService = new MonsterService(this);
         this.recyclerViewElementList = new ArrayList<>();
         this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
         this.monsterConverter = new GsonMonsterConverterImpl();
+        this.monsterConverterDb = new MonsterConverterDbImpl();
     }
 
     @Override
@@ -81,11 +92,29 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
 
     @Override
     public void onSuccess(String responseInString) {
-        monsterAdapter.updateCardPreviewRecycler(monsterConverter.toMonsterClassDtoList(responseInString));
+        List<RecyclerCardPreview> recyclerCardPreviews = monsterConverter.toMonsterClassDtoList(responseInString);
+        monsterAdapter.updateCardPreviewRecycler(recyclerCardPreviews);
+
+        AsyncTask.execute(() -> {
+            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                            AppDataBase.class, "database-name")
+                    .build();
+            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
+            monsterClassDao.nukeTable();
+            monsterClassDao.insertAll(monsterConverterDb.toEntityList(recyclerCardPreviews));
+        });
     }
 
     @Override
     public void onFail(IOException error) {
+        System.out.println("\n\n\n\n fail \n\n\n\n");
 
+        AsyncTask.execute(() -> {
+            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                            AppDataBase.class, "database-name")
+                    .build();
+            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
+            monsterAdapter.updateCardPreviewRecycler(monsterClassDao.getAll().stream().map(MonsterClassDto::toPojo).collect(Collectors.toList()));
+        });
     }
 }
