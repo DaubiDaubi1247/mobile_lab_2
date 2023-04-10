@@ -9,15 +9,16 @@ import java.util.List;
 
 import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.entity.MonsterClass;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 
 @Dao
 public interface MonsterClassDao {
     @Query("SELECT * FROM monster_class ")
-    List<MonsterClass> getAll();
+    List<MonsterClassDto> getAll();
 
     @Insert
     void insertAll(List<MonsterClass> monsterClassList);
 
     @Update(entity = MonsterClass.class)
-    void updateAll(List<MonsterClassDto> monsterClassDtoList);
+    void updateAll(List<MonsterClass> monsterClassDtoList);
 }

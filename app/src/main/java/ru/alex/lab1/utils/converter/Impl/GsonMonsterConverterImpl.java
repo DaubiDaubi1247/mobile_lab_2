@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ru.alex.lab1.dto.BaseCardPreviewDto;
 import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.dto.MonsterDto;
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
@@ -36,12 +37,10 @@ public class GsonMonsterConverterImpl implements MonsterConverter {
     }
 
     @Override
-    public List<RecyclerCardPreview> toMonsterClassDtoList(String responseInStr) {
+    public List<MonsterClassDto> toMonsterClassDtoList(String responseInStr) {
         Type listOfMyClassObject = new TypeToken<ArrayList<MonsterClassDto>>() {}.getType();
         List<MonsterClassDto> monsterDtoList = gson.fromJson(responseInStr, listOfMyClassObject);
 
-        return monsterDtoList.stream()
-                .map(MonsterClassDto::toPojo)
-                .collect(Collectors.toList());
+        return monsterDtoList;
     }
 }

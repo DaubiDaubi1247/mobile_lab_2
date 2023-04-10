@@ -44,4 +44,35 @@ public class MonsterClass {
     public String getImgDirection() {
         return imgDirection;
     }
+
+    public static class MonsterClassBuilder {
+        private Long id;
+
+        private String name;
+
+        private String imgName;
+
+        private String imgDirection;
+
+        MonsterClassBuilder builder() {
+            return new MonsterClassBuilder();
+        }
+
+        MonsterClassBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        MonsterClassBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        MonsterClass build() {
+            return new MonsterClass(id, name, null, null);
+        }
+
+    }
+
+
 }
