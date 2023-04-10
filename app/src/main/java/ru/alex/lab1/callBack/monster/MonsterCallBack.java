@@ -8,5 +8,5 @@ import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 
 public interface MonsterCallBack {
     void onSuccess(String responseInString);
-    void onFail(IOException error) throws JSONException;
+    void onFail(IOException error);
 }

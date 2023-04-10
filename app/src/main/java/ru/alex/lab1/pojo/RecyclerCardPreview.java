@@ -5,6 +5,9 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import javax.security.auth.callback.Callback;
 
 import ru.alex.lab1.R;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
@@ -23,6 +26,14 @@ public class RecyclerCardPreview implements RecyclerViewElement {
 
     public String getName() {
         return name;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getImgName() {
+        return imgName;
     }
 
     private final String source;
@@ -55,6 +66,7 @@ public class RecyclerCardPreview implements RecyclerViewElement {
 
         Glide.with(monsterViewHolder.getMonsterImage())
                 .load(MonsterUrls.BASE_FOR_IMG + source + imgName)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .thumbnail(Glide.with(monsterViewHolder.getMonsterImage()).load(R.drawable.preloader))
                 .fitCenter()
                 .into(monsterViewHolder.getMonsterImage());

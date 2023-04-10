@@ -11,4 +11,8 @@ public interface MonsterConverterDb {
     MonsterClass toEntity(RecyclerCardPreview monsterClassDto);
 
     List<MonsterClass> toEntityList(List<RecyclerCardPreview> monsterClassDtoList);
+
+    MonsterClassDto toDto(MonsterClass monsterClassDto);
+
+    List<MonsterClassDto> toDtoList(List<MonsterClass> monsterClassDtoList);
 }

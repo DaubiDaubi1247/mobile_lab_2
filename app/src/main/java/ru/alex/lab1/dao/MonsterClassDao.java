@@ -14,7 +14,7 @@ import ru.alex.lab1.pojo.RecyclerCardPreview;
 @Dao
 public interface MonsterClassDao {
     @Query("SELECT * FROM monster_class ")
-    List<MonsterClassDto> getAll();
+    List<MonsterClass> getAll();
 
     @Query("DELETE FROM monster_class")
     void nukeTable();

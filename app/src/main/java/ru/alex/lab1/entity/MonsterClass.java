@@ -71,8 +71,18 @@ public class MonsterClass {
             return this;
         }
 
+        public MonsterClassBuilder imgName(String imgName) {
+            this.imgName = imgName;
+            return this;
+        }
+
+        public MonsterClassBuilder imgDirection(String imgDirection) {
+            this.imgDirection = imgDirection;
+            return this;
+        }
+
         public MonsterClass build() {
-            return new MonsterClass(this.id, name, null, null);
+            return new MonsterClass(this.id, name, imgName, imgDirection);
         }
 
     }

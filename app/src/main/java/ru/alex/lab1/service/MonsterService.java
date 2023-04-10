@@ -64,7 +64,7 @@ public class MonsterService extends BaseService {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(@NonNull Call call, @NonNull IOException
                     error) {
-                error.printStackTrace();
+                callBack.onFail(error);
             }
             @Override public void onResponse(@NonNull Call call, @NonNull Response
                     response) throws IOException {

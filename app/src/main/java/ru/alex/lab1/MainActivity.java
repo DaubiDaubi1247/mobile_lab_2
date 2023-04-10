@@ -23,6 +23,7 @@ import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.dao.MonsterClassDao;
 import ru.alex.lab1.db.AppDataBase;
 import ru.alex.lab1.dto.MonsterClassDto;
+import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
@@ -101,20 +102,21 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
                     .build();
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
             monsterClassDao.nukeTable();
+            List<MonsterClass> monsterClassList = monsterConverterDb.toEntityList(recyclerCardPreviews);
             monsterClassDao.insertAll(monsterConverterDb.toEntityList(recyclerCardPreviews));
         });
     }
 
     @Override
     public void onFail(IOException error) {
-        System.out.println("\n\n\n\n fail \n\n\n\n");
 
         AsyncTask.execute(() -> {
             AppDataBase db = Room.databaseBuilder(getApplicationContext(),
                             AppDataBase.class, "database-name")
                     .build();
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
-            monsterAdapter.updateCardPreviewRecycler(monsterClassDao.getAll().stream().map(MonsterClassDto::toPojo).collect(Collectors.toList()));
+            monsterAdapter.updateCardPreviewRecycler(monsterConverterDb.toDtoList(monsterClassDao.getAll())
+                    .stream().map(MonsterClassDto::toPojo).collect(Collectors.toList()));
         });
     }
 }

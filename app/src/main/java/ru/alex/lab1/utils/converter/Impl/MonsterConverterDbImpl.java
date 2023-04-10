@@ -14,6 +14,8 @@ public class MonsterConverterDbImpl implements MonsterConverterDb {
         return MonsterClass.builder()
                 .id(monsterClassDto.getId())
                 .name(monsterClassDto.getName())
+                .imgName(monsterClassDto.getImgName())
+                .imgDirection(monsterClassDto.getSource())
                 .build();
     }
 
@@ -21,6 +23,23 @@ public class MonsterConverterDbImpl implements MonsterConverterDb {
     public List<MonsterClass> toEntityList(List<RecyclerCardPreview> monsterClassDtoList) {
         return monsterClassDtoList.stream()
                 .map(this::toEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public MonsterClassDto toDto(MonsterClass monsterClassDto) {
+        return MonsterClassDto.builder()
+                .id(monsterClassDto.getId())
+                .name(monsterClassDto.getName())
+                .imgName(monsterClassDto.getImgName())
+                .imgDirection(monsterClassDto.getImgDirection())
+                .build();
+    }
+
+    @Override
+    public List<MonsterClassDto> toDtoList(List<MonsterClass> monsterClassDtoList) {
+        return monsterClassDtoList.stream()
+                .map(this::toDto)
                 .collect(Collectors.toList());
     }
 }
