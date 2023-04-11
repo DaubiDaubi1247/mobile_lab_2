@@ -32,15 +32,15 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
         findViewById(R.id.card_description_scroll).setVerticalScrollBarEnabled(false);
 
         long cardId = getIntent().getLongExtra("id", 1);
-        monsterService.getMonsterById(cardId, this);
+//        monsterService.getMonsterById(cardId, this);
     }
 
     @Override
-    public void onSuccess(String responseInString) {
+    public <T> void onSuccess(T responseInString) {
 
-        MonsterWithDescriptionDto monsterDto = monsterConverter.toMonsterWithDesc(responseInString);
-
-        setMonsterDescriptionOnUi(monsterDto);
+//        MonsterWithDescriptionDto monsterDto = monsterConverter.toMonsterWithDesc(responseInString);
+//
+//        setMonsterDescriptionOnUi(monsterDto);
     }
 
     private void setMonsterDescriptionOnUi(MonsterWithDescriptionDto monsterDto) {

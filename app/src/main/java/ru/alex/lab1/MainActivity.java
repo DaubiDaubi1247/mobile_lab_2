@@ -23,7 +23,6 @@ import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.dao.MonsterClassDao;
 import ru.alex.lab1.db.AppDataBase;
 import ru.alex.lab1.dto.MonsterClassDto;
-import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
@@ -41,14 +40,12 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
 
     private final CardPreviewAdapter monsterAdapter;
 
-    private final MonsterConverter monsterConverter;
     private final MonsterConverterDb monsterConverterDb;
 
     public MainActivity() {
         this.monsterService = new MonsterService(this);
         this.recyclerViewElementList = new ArrayList<>();
         this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
-        this.monsterConverter = new GsonMonsterConverterImpl();
         this.monsterConverterDb = new MonsterConverterDbImpl();
     }
 
@@ -92,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
     }
 
     @Override
-    public void onSuccess(String responseInString) {
-        List<RecyclerCardPreview> recyclerCardPreviews = monsterConverter.toMonsterClassDtoList(responseInString);
-        monsterAdapter.updateCardPreviewRecycler(recyclerCardPreviews);
+    public <T> void onSuccess(T response) {
+        List<RecyclerCardPreview> castResponse = (List<RecyclerCardPreview>) response;
+        monsterAdapter.updateCardPreviewRecycler(castResponse);
 
         AsyncTask.execute(() -> {
             AppDataBase db = Room.databaseBuilder(getApplicationContext(),
@@ -102,8 +99,7 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
                     .build();
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
             monsterClassDao.nukeTable();
-            List<MonsterClass> monsterClassList = monsterConverterDb.toEntityList(recyclerCardPreviews);
-            monsterClassDao.insertAll(monsterConverterDb.toEntityList(recyclerCardPreviews));
+            monsterClassDao.insertAll(monsterConverterDb.toEntityList(castResponse));
         });
     }
 
@@ -115,8 +111,11 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
                             AppDataBase.class, "database-name")
                     .build();
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
-            monsterAdapter.updateCardPreviewRecycler(monsterConverterDb.toDtoList(monsterClassDao.getAll())
-                    .stream().map(MonsterClassDto::toPojo).collect(Collectors.toList()));
+            List<MonsterClassDto> monsterClassDtoList = monsterConverterDb.toDtoList(monsterClassDao.getAll());
+
+            runOnUiThread(() -> monsterAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
+                    .map(MonsterClassDto::toPojo).collect(Collectors.toList())));
+
         });
     }
 }

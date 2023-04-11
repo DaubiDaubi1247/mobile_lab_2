@@ -4,9 +4,11 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 
 public interface MonsterCallBack {
-    void onSuccess(String responseInString);
+    <T> void onSuccess(T response);
+
     void onFail(IOException error);
 }

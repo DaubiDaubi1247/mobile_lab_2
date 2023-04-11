@@ -23,7 +23,6 @@ import ru.alex.lab1.utils.converter.MonsterConverter;
 
 public class MonsterListActivity extends AppCompatActivity implements MonsterCallBack {
 
-    private final MonsterService monsterService;
 
     List<RecyclerViewElement> recyclerViewElementList;
     private CardPreviewAdapter cardPreviewAdapter;
@@ -32,7 +31,6 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
 
     public MonsterListActivity() {
         recyclerViewElementList = new ArrayList<>();
-        this.monsterService = new MonsterService(this);
     }
 
     @Override
@@ -65,12 +63,12 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
     }
 
     private void setInitialData(long id) {
-        monsterService.getMonsterListByClassId(id, this);
+//        monsterService.getMonsterListByClassId(id, this);
     }
 
     @Override
-    public void onSuccess(String responseInString) {
-        cardPreviewAdapter.updateCardPreviewRecycler(monsterConverter.toMonsterDtoList(responseInString));
+    public <T> void onSuccess(T responseInString) {
+//        cardPreviewAdapter.updateCardPreviewRecycler(monsterConverter.toMonsterDtoList(responseInString));
     }
 
     @Override

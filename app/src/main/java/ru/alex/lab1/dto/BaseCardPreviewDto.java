@@ -11,13 +11,13 @@ public abstract class BaseCardPreviewDto {
         this.source = source;
     }
 
-    public Long id;
+    protected Long id;
 
-    public String name;
+    protected String name;
 
-    public String imgName;
+    protected String imgName;
 
-    public String source;
+    protected String source;
 
     public abstract RecyclerCardPreview toPojo();
 }
