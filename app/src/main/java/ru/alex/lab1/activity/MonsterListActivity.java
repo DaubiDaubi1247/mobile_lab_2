@@ -16,21 +16,23 @@ import ru.alex.lab1.R;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.pojo.MonsterListTitle;
+import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 
-public class MonsterListActivity extends AppCompatActivity implements MonsterCallBack {
+public class MonsterListActivity extends AppCompatActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
 
+    private final MonsterService monsterService;
 
     List<RecyclerViewElement> recyclerViewElementList;
-    private CardPreviewAdapter cardPreviewAdapter;
 
-    private final MonsterConverter monsterConverter = new GsonMonsterConverterImpl();
+    private CardPreviewAdapter cardPreviewAdapter;
 
     public MonsterListActivity() {
         recyclerViewElementList = new ArrayList<>();
+        monsterService = new MonsterService(this);
     }
 
     @Override
@@ -63,12 +65,12 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
     }
 
     private void setInitialData(long id) {
-//        monsterService.getMonsterListByClassId(id, this);
+        monsterService.getMonsterListByClassId(id, this);
     }
 
     @Override
-    public <T> void onSuccess(T responseInString) {
-//        cardPreviewAdapter.updateCardPreviewRecycler(monsterConverter.toMonsterDtoList(responseInString));
+    public void onSuccess(List<RecyclerCardPreview> response) {
+        cardPreviewAdapter.updateCardPreviewRecycler(response);
     }
 
     @Override

@@ -50,28 +50,28 @@ public class MonsterService extends BaseService {
         makeRequest(callBack, request, monsterConverter::toMonsterClassDtoList);
     }
 
-//    public void getMonsterListByClassId(Long id, MonsterCallBack callBack) {
-//        Request request = new Request.Builder()
-//                .url(MonsterUrls.GET_ALL_MONSTERS + id)
-//                .build();
-//
-//        makeRequest(callBack, request, monsterConverter);
-//    }
-//
-//    public void getMonsterById(Long id, MonsterCallBack callBack) {
-//        Request request = new Request.Builder()
-//                .url(MonsterUrls.MONSTER + id)
-//                .build();
-//
-//        makeRequest(callBack, request);
-//    }
+    public void getMonsterListByClassId(Long id, MonsterCallBack callBack) {
+        Request request = new Request.Builder()
+                .url(MonsterUrls.GET_ALL_MONSTERS + id)
+                .build();
 
-    private <R> void makeRequest(MonsterCallBack callBack, Request request, Function<String,R> converter) {
+        makeRequest(callBack, request, monsterConverter::toMonsterDtoList);
+    }
+
+    public void getMonsterById(Long id, MonsterCallBack<MonsterWithDescriptionDto> callBack) {
+        Request request = new Request.Builder()
+                .url(MonsterUrls.MONSTER + id)
+                .build();
+
+        makeRequest(callBack, request, monsterConverter::toMonsterWithDesc);
+    }
+
+    private <R> void makeRequest(MonsterCallBack<R> callBack, Request request, Function<String,R> converter) {
         okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override public void onFailure(@NonNull Call call, @NonNull IOException
-                    error) {
+            @Override public void onFailure(@NonNull Call call, @NonNull IOException error) {
                 callBack.onFail(error);
             }
+
             @Override public void onResponse(@NonNull Call call, @NonNull Response
                     response) throws IOException {
 
@@ -85,13 +85,12 @@ public class MonsterService extends BaseService {
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
-
                     return;
                 }
 
-                R monsterClassDtoList = converter.apply(responseBody);
+                R convertedResponse = converter.apply(responseBody);
 
-                context.runOnUiThread(() -> callBack.onSuccess(monsterClassDtoList));
+                context.runOnUiThread(() -> callBack.onSuccess(convertedResponse));
             }
         });
     }

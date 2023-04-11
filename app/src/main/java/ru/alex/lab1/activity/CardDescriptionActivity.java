@@ -19,7 +19,7 @@ import ru.alex.lab1.urls.BaseUrl;
 import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 
-public class CardDescriptionActivity extends AppCompatActivity implements MonsterCallBack {
+public class CardDescriptionActivity extends AppCompatActivity implements MonsterCallBack<MonsterWithDescriptionDto> {
 
     private final MonsterService monsterService = new MonsterService(this);
     private final MonsterConverter monsterConverter = new GsonMonsterConverterImpl();
@@ -32,15 +32,13 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
         findViewById(R.id.card_description_scroll).setVerticalScrollBarEnabled(false);
 
         long cardId = getIntent().getLongExtra("id", 1);
-//        monsterService.getMonsterById(cardId, this);
+        monsterService.getMonsterById(cardId, this);
     }
 
     @Override
-    public <T> void onSuccess(T responseInString) {
+    public void onSuccess(MonsterWithDescriptionDto response) {
 
-//        MonsterWithDescriptionDto monsterDto = monsterConverter.toMonsterWithDesc(responseInString);
-//
-//        setMonsterDescriptionOnUi(monsterDto);
+        setMonsterDescriptionOnUi(response);
     }
 
     private void setMonsterDescriptionOnUi(MonsterWithDescriptionDto monsterDto) {

@@ -32,7 +32,7 @@ import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
-public class MainActivity extends AppCompatActivity implements MonsterCallBack {
+public class MainActivity extends AppCompatActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
 
     private final MonsterService monsterService;
 
@@ -89,9 +89,8 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
     }
 
     @Override
-    public <T> void onSuccess(T response) {
-        List<RecyclerCardPreview> castResponse = (List<RecyclerCardPreview>) response;
-        monsterAdapter.updateCardPreviewRecycler(castResponse);
+    public  void onSuccess(List<RecyclerCardPreview> response) {
+        monsterAdapter.updateCardPreviewRecycler(response);
 
         AsyncTask.execute(() -> {
             AppDataBase db = Room.databaseBuilder(getApplicationContext(),
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack {
                     .build();
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
             monsterClassDao.nukeTable();
-            monsterClassDao.insertAll(monsterConverterDb.toEntityList(castResponse));
+            monsterClassDao.insertAll(monsterConverterDb.toEntityList(response));
         });
     }
 

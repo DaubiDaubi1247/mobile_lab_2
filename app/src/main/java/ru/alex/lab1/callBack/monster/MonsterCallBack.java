@@ -7,8 +7,8 @@ import java.io.IOException;
 import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 
-public interface MonsterCallBack {
-    <T> void onSuccess(T response);
+public interface MonsterCallBack<T> {
+    void onSuccess(T response);
 
     void onFail(IOException error);
 }
