@@ -32,7 +32,7 @@ import ru.alex.lab1.urls.monster.MonsterUrls;
 import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 
-public class MonsterService extends BaseService {
+public class MonsterService <T> extends BaseService {
 
     private final Activity context;
     private final MonsterConverter monsterConverter;
@@ -58,7 +58,7 @@ public class MonsterService extends BaseService {
         makeRequest(callBack, request, monsterConverter::toMonsterDtoList);
     }
 
-    public void getMonsterById(Long id, MonsterCallBack<MonsterWithDescriptionDto> callBack) {
+    public void getMonsterById(Long id, MonsterCallBack callBack) {
         Request request = new Request.Builder()
                 .url(MonsterUrls.MONSTER + id)
                 .build();

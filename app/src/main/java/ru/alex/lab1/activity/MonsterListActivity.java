@@ -3,34 +3,40 @@ package ru.alex.lab1.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ru.alex.lab1.R;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.callBack.monster.MonsterCallBack;
+import ru.alex.lab1.dao.MonsterClassDao;
+import ru.alex.lab1.db.AppDataBase;
+import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.pojo.MonsterListTitle;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
-import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
-import ru.alex.lab1.utils.converter.MonsterConverter;
+import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
+import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
 public class MonsterListActivity extends AppCompatActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
 
     private final MonsterService monsterService;
+    private final MonsterConverterDb monsterConverterDb;
 
     List<RecyclerViewElement> recyclerViewElementList;
 
     private CardPreviewAdapter cardPreviewAdapter;
 
     public MonsterListActivity() {
+        this.monsterConverterDb = new MonsterConverterDbImpl();
         recyclerViewElementList = new ArrayList<>();
         monsterService = new MonsterService(this);
     }
@@ -71,10 +77,29 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
     @Override
     public void onSuccess(List<RecyclerCardPreview> response) {
         cardPreviewAdapter.updateCardPreviewRecycler(response);
+
+        AsyncTask.execute(() -> {
+            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                            AppDataBase.class, "database-name")
+                    .build();
+            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
+            monsterClassDao.nukeTable();
+            monsterClassDao.insertAll(monsterConverterDb.toEntityList(response));
+        });
     }
 
     @Override
     public void onFail(IOException error){
+        AsyncTask.execute(() -> {
+            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                            AppDataBase.class, "database-name")
+                    .build();
+            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
+            List<MonsterClassDto> monsterClassDtoList = monsterConverterDb.toDtoList(monsterClassDao.getAll());
 
+            runOnUiThread(() -> cardPreviewAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
+                    .map(MonsterClassDto::toPojo).collect(Collectors.toList())));
+
+        });
     }
 }
