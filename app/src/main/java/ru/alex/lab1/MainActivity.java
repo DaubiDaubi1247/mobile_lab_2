@@ -2,14 +2,14 @@ package ru.alex.lab1;
 
 import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
 
+import android.os.AsyncTask;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,9 +28,7 @@ import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
-import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
-import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
-import ru.alex.lab1.utils.converter.MonsterConverter;
+import ru.alex.lab1.utils.converter.Impl.MonsterClassConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
 public class MainActivity extends AppCompatActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
@@ -41,13 +39,13 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack<L
 
     private final CardPreviewAdapter monsterAdapter;
 
-    private final MonsterConverterDb monsterConverterDb;
+    private final MonsterConverterDb<RecyclerCardPreview, MonsterClass, MonsterClassDto> monsterConverterDb;
 
     public MainActivity() {
         this.monsterService = new MonsterService(this);
         this.recyclerViewElementList = new ArrayList<>();
         this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
-        this.monsterConverterDb = new MonsterConverterDbImpl();
+        this.monsterConverterDb = new MonsterClassConverterDbImpl();
     }
 
     @Override

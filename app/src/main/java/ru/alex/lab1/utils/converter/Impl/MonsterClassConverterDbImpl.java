@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.dto.MonsterDto;
 import ru.alex.lab1.entity.Monster;
+import ru.alex.lab1.entity.MonsterBase;
 import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
-public class MonsterConverterDbImpl implements MonsterConverterDb<RecyclerCardPreview, Monster, MonsterDto> {
-
+public class MonsterClassConverterDbImpl implements MonsterConverterDb<RecyclerCardPreview, MonsterClass, MonsterClassDto> {
     @Override
-    public Monster toEntity(RecyclerCardPreview monsterClassDto) {
-        return Monster.builder()
+    public MonsterClass toEntity(RecyclerCardPreview monsterClassDto) {
+        return MonsterClass.builder()
                 .id(monsterClassDto.getId())
                 .name(monsterClassDto.getName())
                 .imgName(monsterClassDto.getImgName())
@@ -23,15 +23,15 @@ public class MonsterConverterDbImpl implements MonsterConverterDb<RecyclerCardPr
     }
 
     @Override
-    public List<Monster> toEntityList(List<RecyclerCardPreview> monsterClassDtoList) {
+    public List<MonsterClass> toEntityList(List<RecyclerCardPreview> monsterClassDtoList) {
         return monsterClassDtoList.stream()
                 .map(this::toEntity)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public MonsterDto toDto(Monster monsterClassDto) {
-        return MonsterDto.builder()
+    public MonsterClassDto toDto(MonsterClass monsterClassDto) {
+        return MonsterClassDto.builder()
                 .id(monsterClassDto.getId())
                 .name(monsterClassDto.getName())
                 .imgName(monsterClassDto.getImgName())
@@ -40,9 +40,10 @@ public class MonsterConverterDbImpl implements MonsterConverterDb<RecyclerCardPr
     }
 
     @Override
-    public List<MonsterDto> toDtoList(List<Monster> monsterClassDtoList) {
+    public List<MonsterClassDto> toDtoList(List<MonsterClass> monsterClassDtoList) {
         return monsterClassDtoList.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
+
 }

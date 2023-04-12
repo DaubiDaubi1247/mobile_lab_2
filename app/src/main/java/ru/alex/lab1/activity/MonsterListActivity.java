@@ -34,7 +34,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
     private Long classId;
 
     private final MonsterService monsterService;
-    private final MonsterConverterDb monsterConverterDb;
+    private final MonsterConverterDb<RecyclerCardPreview, Monster, MonsterDto> monsterConverterDb;
 
     List<RecyclerViewElement> recyclerViewElementList;
 
@@ -89,7 +89,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
                     .build();
             MonsterDao monsterDao = db.getMonsterDao();
             monsterDao.nukeTable();
-            List<Monster> monsterList = monsterConverterDb.toMonsterEntityList(response, classId);
+            List<Monster> monsterList = monsterConverterDb.toEntityList(response);
             monsterDao.insertAll(monsterList);
         });
     }
@@ -101,7 +101,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
                             AppDataBase.class, "database-name")
                     .build();
             MonsterDao monsterDao = db.getMonsterDao();
-            List<MonsterDto> monsterClassDtoList = monsterConverterDb.toMonsterDtoList(monsterDao.getAllByClassId(classId));
+            List<MonsterDto> monsterClassDtoList = monsterConverterDb.toDtoList(monsterDao.getAllByClassId(classId));
 
             runOnUiThread(() -> cardPreviewAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
                     .map(MonsterDto::toPojo).collect(Collectors.toList())));

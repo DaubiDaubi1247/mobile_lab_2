@@ -26,6 +26,7 @@ import ru.alex.lab1.entity.Monster;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.urls.BaseUrl;
 import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
+import ru.alex.lab1.utils.converter.Impl.MonsterClassConverterDbImpl;
 import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
@@ -37,7 +38,7 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
     private final MonsterConverterDb monsterConverterDb;
 
     public CardDescriptionActivity() {
-        this.monsterConverterDb = new MonsterConverterDbImpl();
+        this.monsterConverterDb = new MonsterClassConverterDbImpl();
     }
 
     @Override

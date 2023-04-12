@@ -9,21 +9,14 @@ import ru.alex.lab1.entity.MonsterBase;
 import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 
-public interface MonsterConverterDb {
+public interface MonsterConverterDb <T, R, DR> {
 
-    MonsterClass toEntity(RecyclerCardPreview monsterClassDto);
+    R toEntity(T monsterClassDto);
 
-    List<MonsterClass> toEntityList(List<RecyclerCardPreview> monsterClassDtoList);
+    List<R> toEntityList(List<T> monsterClassDtoList);
 
-    Monster toMonsterEntity(RecyclerCardPreview monsterClassDto, Long classId);
+    DR toDto(R monsterClassDto);
 
-    List<Monster> toMonsterEntityList(List<RecyclerCardPreview> monsterClassDtoList, Long classId);
+    List<DR> toDtoList(List<R> monsterClassDtoList);
 
-    MonsterClassDto toDto(MonsterClass monsterClassDto);
-
-    List<MonsterClassDto> toDtoList(List<MonsterClass> monsterClassDtoList);
-
-    MonsterDto toMonsterDto(Monster monsterClassDto);
-
-    List<MonsterDto> toMonsterDtoList(List<Monster> monsterClassDtoList);
 }
