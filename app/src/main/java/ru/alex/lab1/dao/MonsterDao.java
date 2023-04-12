@@ -11,8 +11,9 @@ import ru.alex.lab1.entity.MonsterClass;
 
 @Dao
 public interface MonsterDao {
-    @Query("SELECT * FROM monster ")
-    List<Monster> getAll();
+    @Query("SELECT * FROM monster " +
+            "WHERE classId = :classId")
+    List<Monster> getAllByClassId(Long classId);
 
     @Query("DELETE FROM monster")
     void nukeTable();

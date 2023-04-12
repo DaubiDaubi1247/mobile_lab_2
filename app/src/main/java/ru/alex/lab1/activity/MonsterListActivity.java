@@ -31,6 +31,8 @@ import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
 public class MonsterListActivity extends AppCompatActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
 
+    private Long classId;
+
     private final MonsterService monsterService;
     private final MonsterConverterDb monsterConverterDb;
 
@@ -49,7 +51,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monster_list_acitvity);
 
-        long id = getIntent().getLongExtra("id", 1);
+        classId = getIntent().getLongExtra("id", 1);
 
         String title = getIntent().getStringExtra("title");
         recyclerViewElementList.add(new MonsterListTitle(title));
@@ -57,7 +59,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
 
         RecyclerView recyclerView = findViewById(R.id.monster_list_recycler);
 
-        setInitialData(id);
+        setInitialData(classId);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -87,7 +89,8 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
                     .build();
             MonsterDao monsterDao = db.getMonsterDao();
             monsterDao.nukeTable();
-            monsterDao.insertAll(monsterConverterDb.toMonsterEntityList(response));
+            List<Monster> monsterList = monsterConverterDb.toMonsterEntityList(response, classId);
+            monsterDao.insertAll(monsterList);
         });
     }
 
@@ -98,7 +101,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
                             AppDataBase.class, "database-name")
                     .build();
             MonsterDao monsterDao = db.getMonsterDao();
-            List<MonsterDto> monsterClassDtoList = monsterConverterDb.toMonsterDtoList(monsterDao.getAll());
+            List<MonsterDto> monsterClassDtoList = monsterConverterDb.toMonsterDtoList(monsterDao.getAllByClassId(classId));
 
             runOnUiThread(() -> cardPreviewAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
                     .map(MonsterDto::toPojo).collect(Collectors.toList())));

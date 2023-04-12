@@ -16,11 +16,16 @@ import ru.alex.lab1.utils.converter.Builder;
         })
 public class Monster extends MonsterBase {
 
-    public Monster(@NonNull Long id, String name, String imgName, String imgDirection) {
+    public Monster(@NonNull Long id, String name, String imgName, String imgDirection, Long classId) {
         super(id, name, imgName, imgDirection);
+        this.classId = classId;
     }
 
     private Long classId;
+
+    public Long getClassId() {
+        return classId;
+    }
 
     public static MonsterBuilder builder() {
         return new MonsterBuilder();
@@ -34,6 +39,7 @@ public class Monster extends MonsterBase {
         private String imgName;
 
         private String imgDirection;
+        private Long classId;
 
         public MonsterBuilder() {
         }
@@ -58,8 +64,13 @@ public class Monster extends MonsterBase {
             return this;
         }
 
+        public MonsterBuilder classId(Long classId) {
+            this.classId = classId;
+            return this;
+        }
+
         public Monster build() {
-            return new Monster(this.id, name, imgName, imgDirection);
+            return new Monster(this.id, name, imgName, imgDirection, classId);
         }
     }
 }

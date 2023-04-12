@@ -30,19 +30,20 @@ public class MonsterConverterDbImpl implements MonsterConverterDb {
     }
 
     @Override
-    public Monster toMonsterEntity(RecyclerCardPreview monsterClassDto) {
+    public Monster toMonsterEntity(RecyclerCardPreview monsterClassDto, Long classId) {
         return Monster.builder()
                 .id(monsterClassDto.getId())
                 .name(monsterClassDto.getName())
                 .imgName(monsterClassDto.getImgName())
                 .imgDirection(monsterClassDto.getSource())
+                .classId(classId)
                 .build();
     }
 
     @Override
-    public List<Monster> toMonsterEntityList(List<RecyclerCardPreview> monsterClassDtoList) {
+    public List<Monster> toMonsterEntityList(List<RecyclerCardPreview> monsterClassDtoList, Long classId) {
         return monsterClassDtoList.stream()
-                .map(this::toMonsterEntity)
+                .map((el) -> toMonsterEntity(el, classId))
                 .collect(Collectors.toList());
     }
 
