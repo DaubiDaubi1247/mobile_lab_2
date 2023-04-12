@@ -28,13 +28,14 @@ import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
+import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
 
 public class MonsterListActivity extends AppCompatActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
 
     private Long classId;
 
     private final MonsterService monsterService;
-    private final MonsterConverterDb<RecyclerCardPreview, Monster, MonsterDto> monsterConverterDb;
+    private final MonsterConverterDbWithList<RecyclerCardPreview, Monster, MonsterDto> monsterConverterDb;
 
     List<RecyclerViewElement> recyclerViewElementList;
 

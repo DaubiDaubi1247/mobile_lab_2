@@ -17,10 +17,6 @@ public class MonsterDescriptionConverterDbImpl implements MonsterConverterDb<Mon
                 .build();
     }
 
-    @Override
-    public List<MonsterDescription> toEntityList(List<MonsterWithDescriptionDto> monsterClassDtoList) {
-        return null;
-    }
 
     @Override
     public MonsterWithDescriptionDto toDto(MonsterDescription monsterClassDto) {
@@ -31,8 +27,4 @@ public class MonsterDescriptionConverterDbImpl implements MonsterConverterDb<Mon
                 .build();
     }
 
-    @Override
-    public List<MonsterWithDescriptionDto> toDtoList(List<MonsterDescription> monsterClassDtoList) {
-        return null;
-    }
 }

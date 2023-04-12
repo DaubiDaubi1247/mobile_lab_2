@@ -30,6 +30,7 @@ import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.MonsterClassConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
+import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
 
 public class MainActivity extends AppCompatActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack<L
 
     private final CardPreviewAdapter monsterAdapter;
 
-    private final MonsterConverterDb<RecyclerCardPreview, MonsterClass, MonsterClassDto> monsterConverterDb;
+    private final MonsterConverterDbWithList<RecyclerCardPreview, MonsterClass, MonsterClassDto> monsterConverterDb;
 
     public MainActivity() {
         this.monsterService = new MonsterService(this);

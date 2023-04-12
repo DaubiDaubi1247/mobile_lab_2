@@ -1,12 +1,8 @@
 package ru.alex.lab1.entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
-
-import ru.alex.lab1.utils.converter.Builder;
 
 @Entity(tableName = "monster",
         foreignKeys = {@ForeignKey(entity = MonsterClass.class,

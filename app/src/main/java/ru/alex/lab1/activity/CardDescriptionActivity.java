@@ -66,6 +66,7 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
                     .build();
             MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
             monsterDescriptionDao.nukeTable();
+
             MonsterDescription monsterDescription = monsterConverterDb.toEntity(response);
             monsterDescription.setMonsterId(monsterId);
             monsterDescriptionDao.insert(monsterDescription);
@@ -80,6 +81,7 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
                     .build();
             MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
             MonsterDao monsterDao = db.getMonsterDao();
+            
             MonsterWithDescriptionDto monsterWithDescriptionDto = monsterConverterDb.toDto(monsterDescriptionDao.getMonsterById(monsterId)
                     .orElseThrow(() -> new RuntimeException("not found")));
             monsterWithDescriptionDto.setSource(monsterDao.getMonsterById(monsterId));

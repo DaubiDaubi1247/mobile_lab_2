@@ -3,14 +3,13 @@ package ru.alex.lab1.utils.converter.Impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ru.alex.lab1.dto.MonsterClassDto;
 import ru.alex.lab1.dto.MonsterDto;
 import ru.alex.lab1.entity.Monster;
-import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
+import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
 
-public class MonsterConverterDbImpl implements MonsterConverterDb<RecyclerCardPreview, Monster, MonsterDto> {
+public class MonsterConverterDbImpl implements MonsterConverterDbWithList<RecyclerCardPreview, Monster, MonsterDto> {
 
     @Override
     public Monster toEntity(RecyclerCardPreview monsterClassDto) {

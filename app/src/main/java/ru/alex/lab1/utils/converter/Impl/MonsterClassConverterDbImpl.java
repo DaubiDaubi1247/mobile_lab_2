@@ -4,14 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ru.alex.lab1.dto.MonsterClassDto;
-import ru.alex.lab1.dto.MonsterDto;
-import ru.alex.lab1.entity.Monster;
-import ru.alex.lab1.entity.MonsterBase;
 import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
+import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
 
-public class MonsterClassConverterDbImpl implements MonsterConverterDb<RecyclerCardPreview, MonsterClass, MonsterClassDto> {
+public class MonsterClassConverterDbImpl implements MonsterConverterDbWithList<RecyclerCardPreview, MonsterClass, MonsterClassDto> {
     @Override
     public MonsterClass toEntity(RecyclerCardPreview monsterClassDto) {
         return MonsterClass.builder()

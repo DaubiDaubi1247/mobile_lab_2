@@ -13,10 +13,6 @@ public interface MonsterConverterDb <T, R, DR> {
 
     R toEntity(T monsterClassDto);
 
-    List<R> toEntityList(List<T> monsterClassDtoList);
-
     DR toDto(R monsterClassDto);
-
-    List<DR> toDtoList(List<R> monsterClassDtoList);
 
 }
