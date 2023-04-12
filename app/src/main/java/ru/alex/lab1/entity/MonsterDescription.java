@@ -13,8 +13,32 @@ import androidx.room.PrimaryKey;
         })
 public class MonsterDescription {
 
+        public void setMonsterId(Long monsterId) {
+                this.monsterId = monsterId;
+        }
+
         @PrimaryKey
         private Long id;
+
+        public Long getId() {
+                return id;
+        }
+
+        public String getQuote() {
+                return quote;
+        }
+
+        public String getQuoteAuthor() {
+                return quoteAuthor;
+        }
+
+        public String getDescription() {
+                return description;
+        }
+
+        public Long getMonsterId() {
+                return monsterId;
+        }
 
         @ColumnInfo(name = "quote")
         private String quote;

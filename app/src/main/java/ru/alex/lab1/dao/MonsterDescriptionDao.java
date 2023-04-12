@@ -5,7 +5,9 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
+import java.util.Optional;
 
+import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 import ru.alex.lab1.entity.Monster;
 import ru.alex.lab1.entity.MonsterDescription;
 
@@ -14,7 +16,7 @@ public interface MonsterDescriptionDao {
 
     @Query("SELECT * FROM monster_desc " +
             "WHERE monsterId = :id ")
-    List<Monster> getMonsterById(Long id);
+    Optional<MonsterDescription> getMonsterById(Long id);
 
     @Query("DELETE FROM monster_desc")
     void nukeTable();

@@ -15,6 +15,10 @@ public interface MonsterDao {
             "WHERE classId = :classId")
     List<Monster> getAllByClassId(Long classId);
 
+    @Query("SELECT * FROM monster " +
+            "WHERE id = :monsterId")
+    Monster getMonsterById(Long monsterId);
+
     @Query("DELETE FROM monster")
     void nukeTable();
 

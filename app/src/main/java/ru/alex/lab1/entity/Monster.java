@@ -27,6 +27,10 @@ public class Monster extends MonsterBase {
         return classId;
     }
 
+    public void setClassId(Long classId) {
+        this.classId = classId;
+    }
+
     public static MonsterBuilder builder() {
         return new MonsterBuilder();
     }

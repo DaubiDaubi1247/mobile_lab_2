@@ -10,7 +10,7 @@ import ru.alex.lab1.entity.Monster;
 import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.entity.MonsterDescription;
 
-@Database(entities = {MonsterClass.class, Monster.class}, version = 1)
+@Database(entities = {MonsterClass.class, Monster.class, MonsterDescription.class}, version = 1)
 public abstract class AppDataBase extends RoomDatabase {
 
     public abstract MonsterClassDao getMonsterClassDao();

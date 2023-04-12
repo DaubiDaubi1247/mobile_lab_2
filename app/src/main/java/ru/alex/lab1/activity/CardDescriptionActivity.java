@@ -23,11 +23,13 @@ import ru.alex.lab1.db.AppDataBase;
 import ru.alex.lab1.dto.MonsterDto;
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
 import ru.alex.lab1.entity.Monster;
+import ru.alex.lab1.entity.MonsterDescription;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.urls.BaseUrl;
 import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
 import ru.alex.lab1.utils.converter.Impl.MonsterClassConverterDbImpl;
 import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
+import ru.alex.lab1.utils.converter.Impl.MonsterDescriptionConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
@@ -35,10 +37,12 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
 
     private final MonsterService monsterService = new MonsterService(this);
     private final MonsterConverter monsterConverter = new GsonMonsterConverterImpl();
-    private final MonsterConverterDb monsterConverterDb;
+
+    private Long monsterId;
+    private final MonsterConverterDb<MonsterWithDescriptionDto, MonsterDescription, MonsterWithDescriptionDto> monsterConverterDb;
 
     public CardDescriptionActivity() {
-        this.monsterConverterDb = new MonsterClassConverterDbImpl();
+        this.monsterConverterDb = new MonsterDescriptionConverterDbImpl();
     }
 
     @Override
@@ -48,8 +52,8 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
 
         findViewById(R.id.card_description_scroll).setVerticalScrollBarEnabled(false);
 
-        long cardId = getIntent().getLongExtra("id", 1);
-        monsterService.getMonsterById(cardId, this);
+        monsterId = getIntent().getLongExtra("id", 1);
+        monsterService.getMonsterById(monsterId, this);
     }
 
     @Override
@@ -62,8 +66,9 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
                     .build();
             MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
             monsterDescriptionDao.nukeTable();
-            List<Monster> monsterList = monsterConverterDb.toMonsterEntityList(response, monsterId);
-            monsterDescriptionDao.insert(monsterList);
+            MonsterDescription monsterDescription = monsterConverterDb.toEntity(response);
+            monsterDescription.setMonsterId(monsterId);
+            monsterDescriptionDao.insert(monsterDescription);
         });
     }
 
@@ -74,10 +79,12 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
                             AppDataBase.class, "database-name")
                     .build();
             MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
-            List<MonsterDto> monsterClassDtoList = monsterConverterDb.toMonsterDtoList(monsterDao.getAllByClassId(classId));
+            MonsterDao monsterDao = db.getMonsterDao();
+            MonsterWithDescriptionDto monsterWithDescriptionDto = monsterConverterDb.toDto(monsterDescriptionDao.getMonsterById(monsterId)
+                    .orElseThrow(() -> new RuntimeException("not found")));
+            monsterWithDescriptionDto.setSource(monsterDao.getMonsterById(monsterId));
 
-            runOnUiThread(() -> cardPreviewAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
-                    .map(MonsterDto::toPojo).collect(Collectors.toList())));
+            runOnUiThread(() -> setMonsterDescriptionOnUi(monsterWithDescriptionDto));
 
         });
     }

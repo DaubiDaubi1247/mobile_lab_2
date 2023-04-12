@@ -90,6 +90,7 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
             MonsterDao monsterDao = db.getMonsterDao();
             monsterDao.nukeTable();
             List<Monster> monsterList = monsterConverterDb.toEntityList(response);
+            monsterList.forEach(el -> el.setClassId(classId));
             monsterDao.insertAll(monsterList);
         });
     }

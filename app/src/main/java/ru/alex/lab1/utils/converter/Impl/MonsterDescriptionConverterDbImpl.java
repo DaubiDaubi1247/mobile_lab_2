@@ -2,26 +2,37 @@ package ru.alex.lab1.utils.converter.Impl;
 
 import java.util.List;
 
+import ru.alex.lab1.dto.MonsterWithDescriptionDto;
+import ru.alex.lab1.entity.MonsterDescription;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
-public class MonsterDescriptionConverterDbImpl<T, R, DR> implements MonsterConverterDb<T, R, DR> {
+public class MonsterDescriptionConverterDbImpl implements MonsterConverterDb<MonsterWithDescriptionDto, MonsterDescription, MonsterWithDescriptionDto> {
     @Override
-    public R toEntity(T monsterClassDto) {
+    public MonsterDescription toEntity(MonsterWithDescriptionDto monsterClassDto) {
+        return MonsterDescription.builder()
+                .id(monsterClassDto.getId())
+                .quote(monsterClassDto.getQuote())
+                .quoteAuthor(monsterClassDto.getQuoteAuthor())
+                .description(monsterClassDto.getDescription())
+                .build();
+    }
+
+    @Override
+    public List<MonsterDescription> toEntityList(List<MonsterWithDescriptionDto> monsterClassDtoList) {
         return null;
     }
 
     @Override
-    public List<R> toEntityList(List<T> monsterClassDtoList) {
-        return null;
+    public MonsterWithDescriptionDto toDto(MonsterDescription monsterClassDto) {
+        return MonsterWithDescriptionDto.builder()
+                .quote(monsterClassDto.getQuote())
+                .quoteAuthor(monsterClassDto.getQuoteAuthor())
+                .description(monsterClassDto.getDescription())
+                .build();
     }
 
     @Override
-    public DR toDto(R monsterClassDto) {
-        return null;
-    }
-
-    @Override
-    public List<DR> toDtoList(List<R> monsterClassDtoList) {
+    public List<MonsterWithDescriptionDto> toDtoList(List<MonsterDescription> monsterClassDtoList) {
         return null;
     }
 }
