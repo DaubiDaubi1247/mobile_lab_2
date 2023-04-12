@@ -1,6 +1,13 @@
 package ru.alex.lab1.dto;
 
 public class MonsterWithDescriptionDto {
+
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
     private String name;
     private String source;
     private String imgName;

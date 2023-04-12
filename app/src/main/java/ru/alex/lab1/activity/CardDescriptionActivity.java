@@ -1,28 +1,44 @@
 package ru.alex.lab1.activity;
 
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import ru.alex.lab1.R;
 import ru.alex.lab1.callBack.monster.MonsterCallBack;
+import ru.alex.lab1.dao.MonsterDao;
+import ru.alex.lab1.dao.MonsterDescriptionDao;
+import ru.alex.lab1.db.AppDataBase;
+import ru.alex.lab1.dto.MonsterDto;
 import ru.alex.lab1.dto.MonsterWithDescriptionDto;
+import ru.alex.lab1.entity.Monster;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.urls.BaseUrl;
 import ru.alex.lab1.utils.converter.Impl.GsonMonsterConverterImpl;
+import ru.alex.lab1.utils.converter.Impl.MonsterConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverter;
+import ru.alex.lab1.utils.converter.MonsterConverterDb;
 
 public class CardDescriptionActivity extends AppCompatActivity implements MonsterCallBack<MonsterWithDescriptionDto> {
 
     private final MonsterService monsterService = new MonsterService(this);
     private final MonsterConverter monsterConverter = new GsonMonsterConverterImpl();
+    private final MonsterConverterDb monsterConverterDb;
+
+    public CardDescriptionActivity() {
+        this.monsterConverterDb = new MonsterConverterDbImpl();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +55,30 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
     public void onSuccess(MonsterWithDescriptionDto response) {
 
         setMonsterDescriptionOnUi(response);
+        AsyncTask.execute(() -> {
+            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                            AppDataBase.class, "database-name")
+                    .build();
+            MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
+            monsterDescriptionDao.nukeTable();
+            List<Monster> monsterList = monsterConverterDb.toMonsterEntityList(response, monsterId);
+            monsterDescriptionDao.insert(monsterList);
+        });
+    }
+
+    @Override
+    public void onFail(IOException error) {
+        AsyncTask.execute(() -> {
+            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                            AppDataBase.class, "database-name")
+                    .build();
+            MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
+            List<MonsterDto> monsterClassDtoList = monsterConverterDb.toMonsterDtoList(monsterDao.getAllByClassId(classId));
+
+            runOnUiThread(() -> cardPreviewAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
+                    .map(MonsterDto::toPojo).collect(Collectors.toList())));
+
+        });
     }
 
     private void setMonsterDescriptionOnUi(MonsterWithDescriptionDto monsterDto) {
@@ -64,8 +104,4 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
         textView.setText(monsterDto.getDescription());
     }
 
-    @Override
-    public void onFail(IOException error) {
-
-    }
 }
