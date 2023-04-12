@@ -23,6 +23,7 @@ import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.dao.MonsterClassDao;
 import ru.alex.lab1.db.AppDataBase;
 import ru.alex.lab1.dto.MonsterClassDto;
+import ru.alex.lab1.entity.MonsterClass;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.pojo.Title;
 import ru.alex.lab1.recycler.RecyclerViewElement;
@@ -98,7 +99,8 @@ public class MainActivity extends AppCompatActivity implements MonsterCallBack<L
                     .build();
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
             monsterClassDao.nukeTable();
-            monsterClassDao.insertAll(monsterConverterDb.toEntityList(response));
+            List<MonsterClass> monsterClassList = monsterConverterDb.toEntityList(response);
+            monsterClassDao.insertAll(monsterClassList);
         });
     }
 

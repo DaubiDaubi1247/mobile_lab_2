@@ -18,8 +18,6 @@ public class MonsterClassDto extends BaseCardPreviewDto {
         return new MonsterClassDto.MonsterClassBuilder();
     }
 
-
-
     public static class MonsterClassBuilder {
         private Long id;
 

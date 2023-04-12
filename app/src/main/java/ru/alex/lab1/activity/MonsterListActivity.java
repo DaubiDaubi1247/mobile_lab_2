@@ -17,8 +17,11 @@ import ru.alex.lab1.R;
 import ru.alex.lab1.adapter.CardPreviewAdapter;
 import ru.alex.lab1.callBack.monster.MonsterCallBack;
 import ru.alex.lab1.dao.MonsterClassDao;
+import ru.alex.lab1.dao.MonsterDao;
 import ru.alex.lab1.db.AppDataBase;
 import ru.alex.lab1.dto.MonsterClassDto;
+import ru.alex.lab1.dto.MonsterDto;
+import ru.alex.lab1.entity.Monster;
 import ru.alex.lab1.pojo.MonsterListTitle;
 import ru.alex.lab1.pojo.RecyclerCardPreview;
 import ru.alex.lab1.recycler.RecyclerViewElement;
@@ -82,9 +85,9 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
             AppDataBase db = Room.databaseBuilder(getApplicationContext(),
                             AppDataBase.class, "database-name")
                     .build();
-            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
-            monsterClassDao.nukeTable();
-            monsterClassDao.insertAll(monsterConverterDb.toEntityList(response));
+            MonsterDao monsterDao = db.getMonsterDao();
+            monsterDao.nukeTable();
+            monsterDao.insertAll(monsterConverterDb.toMonsterEntityList(response));
         });
     }
 
@@ -94,11 +97,11 @@ public class MonsterListActivity extends AppCompatActivity implements MonsterCal
             AppDataBase db = Room.databaseBuilder(getApplicationContext(),
                             AppDataBase.class, "database-name")
                     .build();
-            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
-            List<MonsterClassDto> monsterClassDtoList = monsterConverterDb.toDtoList(monsterClassDao.getAll());
+            MonsterDao monsterDao = db.getMonsterDao();
+            List<MonsterDto> monsterClassDtoList = monsterConverterDb.toMonsterDtoList(monsterDao.getAll());
 
             runOnUiThread(() -> cardPreviewAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
-                    .map(MonsterClassDto::toPojo).collect(Collectors.toList())));
+                    .map(MonsterDto::toPojo).collect(Collectors.toList())));
 
         });
     }

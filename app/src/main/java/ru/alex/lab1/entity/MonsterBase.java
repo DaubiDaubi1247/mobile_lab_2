@@ -45,6 +45,46 @@ public class MonsterBase {
         return imgDirection;
     }
 
+//    public static MonsterClassBuilder builder() {
+//        return new MonsterClassBuilder();
+//    }
+//
+//    public static class MonsterClassBuilder {
+//        private Long id;
+//
+//        private String name;
+//
+//        private String imgName;
+//
+//        private String imgDirection;
+//
+//        public MonsterClassBuilder() {
+//        }
+//
+//        public MonsterClassBuilder id(Long id) {
+//            this.id = id;
+//            return this;
+//        }
+//
+//        public MonsterClassBuilder name(String name) {
+//            this.name = name;
+//            return this;
+//        }
+//
+//        public MonsterClassBuilder imgName(String imgName) {
+//            this.imgName = imgName;
+//            return this;
+//        }
+//
+//        public MonsterClassBuilder imgDirection(String imgDirection) {
+//            this.imgDirection = imgDirection;
+//            return this;
+//        }
+//
+//        public MonsterBase build() {
+//            return new MonsterBase(this.id, name, imgName, imgDirection);
+//        }
+//    }
 
 }
 
