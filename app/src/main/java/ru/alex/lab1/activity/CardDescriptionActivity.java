@@ -3,6 +3,7 @@ package ru.alex.lab1.activity;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -81,9 +82,15 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
                     .build();
             MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
             MonsterDao monsterDao = db.getMonsterDao();
-            
-            MonsterWithDescriptionDto monsterWithDescriptionDto = monsterConverterDb.toDto(monsterDescriptionDao.getMonsterById(monsterId)
-                    .orElseThrow(() -> new RuntimeException("not found")));
+            MonsterWithDescriptionDto monsterWithDescriptionDto;
+            try {
+                monsterWithDescriptionDto  = monsterConverterDb.toDto(monsterDescriptionDao.getMonsterById(monsterId)
+                        .orElseThrow(() -> new RuntimeException("not found")));
+            } catch (RuntimeException e) {
+                Log.e("monster description", e.getMessage());
+                return;
+            }
+
             monsterWithDescriptionDto.setSource(monsterDao.getMonsterById(monsterId));
 
             runOnUiThread(() -> setMonsterDescriptionOnUi(monsterWithDescriptionDto));
