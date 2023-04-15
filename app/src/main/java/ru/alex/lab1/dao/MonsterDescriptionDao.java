@@ -18,8 +18,9 @@ public interface MonsterDescriptionDao {
             "WHERE monsterId = :id ")
     Optional<MonsterDescription> getMonsterById(Long id);
 
-    @Query("DELETE FROM monster_desc")
-    void nukeTable();
+    @Query("DELETE FROM monster_desc " +
+            "WHERE monsterId = :monsterId")
+    void nukeTableByMonsterId(long monsterId);
 
     @Insert
     void insert(MonsterDescription monsterDescription);

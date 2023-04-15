@@ -22,6 +22,4 @@ public interface MonsterClassDao {
     @Insert
     void insertAll(List<MonsterClass> monsterClassList);
 
-    @Update(entity = MonsterClass.class)
-    void updateAll(List<MonsterClass> monsterClassDtoList);
 }

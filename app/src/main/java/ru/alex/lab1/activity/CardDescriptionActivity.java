@@ -65,7 +65,7 @@ public class CardDescriptionActivity extends AppCompatActivity implements Monste
                             AppDataBase.class, "database-name")
                     .build();
             MonsterDescriptionDao monsterDescriptionDao = db.getMonsterDescDao();
-            monsterDescriptionDao.nukeTable();
+            monsterDescriptionDao.nukeTableByMonsterId(monsterId);
 
             MonsterDescription monsterDescription = monsterConverterDb.toEntity(response);
             monsterDescription.setMonsterId(monsterId);
