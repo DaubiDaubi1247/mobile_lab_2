@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -32,6 +33,7 @@ import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.MonsterClassConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
+import ru.alex.lab1.viewModel.DataBaseViewModel;
 
 public class RecyclerPreviewCardFragment extends Fragment implements MonsterCallBack<List<RecyclerCardPreview>> {
 
@@ -47,8 +49,10 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
 
     private RecyclerView recyclerView;
 
+
     public RecyclerPreviewCardFragment() {
         this.activity = getActivity();
+
         this.monsterService = new MonsterService(activity);
         this.recyclerViewElementList = new ArrayList<>();
         this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
@@ -69,10 +73,12 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
         return view;
     }
 
+
+
     private void prepareAndSetRecyclerView(View view) {
         recyclerViewElementList.add(new Title());
 
-        RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 
         recyclerView.setAdapter(monsterAdapter);
 
@@ -100,9 +106,7 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
         monsterAdapter.updateCardPreviewRecycler(response);
 
         AsyncTask.execute(() -> {
-            AppDataBase db = Room.databaseBuilder(activity.getApplicationContext(),
-                            AppDataBase.class, "database-name")
-                    .build();
+            AppDataBase db = AppDataBase.getInstance(getContext());
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
             monsterClassDao.nukeTable();
             List<MonsterClass> monsterClassList = monsterConverterDb.toEntityList(response);
@@ -114,13 +118,11 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
     public void onFail(IOException error) {
 
         AsyncTask.execute(() -> {
-            AppDataBase db = Room.databaseBuilder(activity.getApplicationContext(),
-                            AppDataBase.class, "database-name")
-                    .build();
+            AppDataBase db = AppDataBase.getInstance(getContext());
             MonsterClassDao monsterClassDao = db.getMonsterClassDao();
             List<MonsterClassDto> monsterClassDtoList = monsterConverterDb.toDtoList(monsterClassDao.getAll());
 
-            activity.runOnUiThread(() -> monsterAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
+            getActivity().runOnUiThread(() -> monsterAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
                     .map(MonsterClassDto::toPojo).collect(Collectors.toList())));
 
         });
