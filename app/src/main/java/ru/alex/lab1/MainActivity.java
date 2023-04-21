@@ -37,21 +37,9 @@ import ru.alex.lab1.utils.converter.Impl.MonsterClassConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverterDb;
 import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
 
-public class MainActivity extends FragmentActivity implements MonsterCallBack<List<RecyclerCardPreview>> {
-
-    private final MonsterService monsterService;
-
-    private final List<RecyclerViewElement> recyclerViewElementList;
-
-    private final CardPreviewAdapter monsterAdapter;
-
-    private final MonsterConverterDbWithList<RecyclerCardPreview, MonsterClass, MonsterClassDto> monsterConverterDb;
+public class MainActivity extends FragmentActivity {
 
     public MainActivity() {
-        this.monsterService = new MonsterService(this);
-        this.recyclerViewElementList = new ArrayList<>();
-        this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
-        this.monsterConverterDb = new MonsterClassConverterDbImpl();
     }
 
     @Override
@@ -63,71 +51,13 @@ public class MainActivity extends FragmentActivity implements MonsterCallBack<Li
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         RecyclerPreviewCardFragment fragment = new RecyclerPreviewCardFragment();
-        fragmentTransaction.add(R.id.body_test, fragment);
+        fragmentTransaction.add(R.id.body, fragment);
         fragmentTransaction.commit();
-
-
-        prepareAndSetRecyclerView();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.footer);
         bottomNavigationView.setSelectedItemId(R.id.page_2);
 
     }
 
-    private void prepareAndSetRecyclerView() {
-        recyclerViewElementList.add(new Title());
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-
-        recyclerView.setAdapter(monsterAdapter);
-
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (monsterAdapter.getItemViewType(position) == RecyclerViewElement.TITLE) {
-                    return 2;
-                }
-                return 1;
-            }
-        });
-        recyclerView.setLayoutManager(layoutManager);
-
-        setInitialData();
-    }
-
-    private void setInitialData() {
-         monsterService.getMonsterClassList(this);
-    }
-
-    @Override
-    public  void onSuccess(List<RecyclerCardPreview> response) {
-        monsterAdapter.updateCardPreviewRecycler(response);
-
-        AsyncTask.execute(() -> {
-            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
-                            AppDataBase.class, "database-name")
-                    .build();
-            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
-            monsterClassDao.nukeTable();
-            List<MonsterClass> monsterClassList = monsterConverterDb.toEntityList(response);
-            monsterClassDao.insertAll(monsterClassList);
-        });
-    }
-
-    @Override
-    public void onFail(IOException error) {
-
-        AsyncTask.execute(() -> {
-            AppDataBase db = Room.databaseBuilder(getApplicationContext(),
-                            AppDataBase.class, "database-name")
-                    .build();
-            MonsterClassDao monsterClassDao = db.getMonsterClassDao();
-            List<MonsterClassDto> monsterClassDtoList = monsterConverterDb.toDtoList(monsterClassDao.getAll());
-
-            runOnUiThread(() -> monsterAdapter.updateCardPreviewRecycler(monsterClassDtoList.stream()
-                    .map(MonsterClassDto::toPojo).collect(Collectors.toList())));
-
-        });
-    }
 }
