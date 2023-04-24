@@ -7,10 +7,12 @@
     style="@style/container"
     tools:context=".activity.MonsterListActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/monster_list_recycler"
+    <LinearLayout
+        android:id="@+id/monster_list_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
