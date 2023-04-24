@@ -7,62 +7,12 @@
     style="@style/container"
     tools:context=".activity.CardDescriptionActivity">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/card_description_body"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/card_description_scroll"
-        android:layout_height="0dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/card_description_text"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/card_description_img"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/description_card_description_text_margin_bottom"
-                android:textSize="@dimen/very_big_in_sp"
-                android:id="@+id/card_description_name"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/medium_in_sp"
-                android:layout_marginBottom="@dimen/description_card_description_text_margin_bottom"
-                android:id="@+id/card_description_quote"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:gravity="end"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/medium_in_sp"
-                    android:text="@string/quoteAuthor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/medium_in_sp"
-                    android:id="@+id/card_description_quote_author"/>
-            </LinearLayout>
-
-            <TextView
-                android:lineSpacingExtra="@dimen/description_card_description_description_line_spacing"
-                android:layout_marginTop="@dimen/description_card_description_description_margin_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/card_description_description"/>
-
-        </LinearLayout>
-    </ScrollView>
+        android:orientation="vertical">
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

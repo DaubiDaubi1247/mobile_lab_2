@@ -1,19 +1,15 @@
 
 package ru.alex.lab1.fragment;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,11 +29,8 @@ import ru.alex.lab1.recycler.RecyclerViewElement;
 import ru.alex.lab1.service.MonsterService;
 import ru.alex.lab1.utils.converter.Impl.MonsterClassConverterDbImpl;
 import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
-import ru.alex.lab1.viewModel.DataBaseViewModel;
 
 public class RecyclerPreviewCardFragment extends Fragment implements MonsterCallBack<List<RecyclerCardPreview>> {
-
-    private final Activity activity;
 
     private MonsterService monsterService;
 
@@ -49,7 +42,6 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
 
 
     public RecyclerPreviewCardFragment() {
-        this.activity = getActivity();
 
         this.recyclerViewElementList = new ArrayList<>();
         this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
@@ -80,7 +72,7 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
 
         recyclerView.setAdapter(monsterAdapter);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
