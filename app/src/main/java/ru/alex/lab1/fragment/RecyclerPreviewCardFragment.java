@@ -39,7 +39,7 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
 
     private final Activity activity;
 
-    private final MonsterService monsterService;
+    private MonsterService monsterService;
 
     private final List<RecyclerViewElement> recyclerViewElementList;
 
@@ -47,13 +47,10 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
 
     private final MonsterConverterDbWithList<RecyclerCardPreview, MonsterClass, MonsterClassDto> monsterConverterDb;
 
-    private RecyclerView recyclerView;
-
 
     public RecyclerPreviewCardFragment() {
         this.activity = getActivity();
 
-        this.monsterService = new MonsterService(activity);
         this.recyclerViewElementList = new ArrayList<>();
         this.monsterAdapter = new CardPreviewAdapter(recyclerViewElementList);
         this.monsterConverterDb = new MonsterClassConverterDbImpl();
@@ -69,6 +66,7 @@ public class RecyclerPreviewCardFragment extends Fragment implements MonsterCall
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycler_preview_card, container, false);
+        this.monsterService = new MonsterService(getActivity());
         prepareAndSetRecyclerView(view);
         return view;
     }

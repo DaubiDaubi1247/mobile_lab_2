@@ -33,7 +33,7 @@ import ru.alex.lab1.utils.converter.MonsterConverterDbWithList;
 public class MonsterCardPreviewFragment extends android.app.Fragment implements MonsterCallBack<List<RecyclerCardPreview>> {
     private Long classId;
 
-    private final MonsterService monsterService;
+    private MonsterService monsterService;
     private final MonsterConverterDbWithList<RecyclerCardPreview, Monster, MonsterDto> monsterConverterDb;
 
     List<RecyclerViewElement> recyclerViewElementList;
@@ -46,7 +46,6 @@ public class MonsterCardPreviewFragment extends android.app.Fragment implements 
         this.activity = new Activity();
         this.monsterConverterDb = new MonsterConverterDbImpl();
         recyclerViewElementList = new ArrayList<>();
-        monsterService = new MonsterService(getActivity());
     }
 
     @Override
@@ -68,6 +67,7 @@ public class MonsterCardPreviewFragment extends android.app.Fragment implements 
 
         RecyclerView recyclerView = view.findViewById(R.id.monster_list_recycler);
 
+        monsterService = new MonsterService(getActivity());
         setInitialData(classId);
 
         recyclerView.setAdapter(cardPreviewAdapter);
