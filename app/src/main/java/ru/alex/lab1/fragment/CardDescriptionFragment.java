@@ -35,12 +35,10 @@ public class CardDescriptionFragment extends Fragment implements MonsterCallBack
 
     private View parentView;
 
-    private final MonsterConverter monsterConverter;
     private final MonsterConverterDb<MonsterWithDescriptionDto, MonsterDescription, MonsterWithDescriptionDto> monsterConverterDb;
 
     public CardDescriptionFragment() {
         monsterConverterDb = new MonsterDescriptionConverterDbImpl();;
-        monsterConverter = new GsonMonsterConverterImpl();
     }
 
 
